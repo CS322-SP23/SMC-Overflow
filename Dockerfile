@@ -8,3 +8,5 @@ RUN sudo apt -y install python3
 RUN sudo apt -y install python3-pip
 RUN apt-get -y install libpq-dev
 RUN nvm install node
+RUN pip install flask
+RUN flask run
