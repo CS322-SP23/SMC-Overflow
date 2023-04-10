@@ -1,16 +1,65 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Question Submission Form</title>
+    <style>
+      form {
+        margin: 20px auto;
+        padding: 20px;
+        max-width: 500px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px #ccc;
+        font-family: Arial, sans-serif;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      input, select, textarea {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+      }
+      button {
+        background-color: #880ca7;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
     <form>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required>
+
+      <label for="category">Category:</label>
+      <select id="category" name="category">
+        <option value="select-value">Select a Value</option>
+        <option value="computer-science">Computer Science</option>
+        <option value="music">Music</option>
+        <option value="math">Math</option>
+        <option value="english">English</option>
+      </select>
       
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" required></textarea>
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" required></textarea>
       
-        <button type="submit">Submit</button>
-      </form>
+      <button type="submit">Submit</button>
+    </form>
   </body>
 </html>
