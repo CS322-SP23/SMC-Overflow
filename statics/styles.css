@@ -2,7 +2,7 @@
   text-align: center;
   font-family: Helvetica;
   font-weight: bold;
-  color: #9409f1;
+  color: #532884;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 1);
   font-size: 4em;
 }
@@ -21,7 +21,7 @@
   margin: 5px;
   padding: 12px 24px;
   font-size: 20px;
-  background-color: #f1e209;
+  background-color: #F5A00F;
   color: black;
   border: none;
   border-radius: 8px;
@@ -31,7 +31,7 @@
 }
 
 .categories-button:hover {
-  background-color: #9409f1;
+  background-color: #532884;
   color: white;
   font-size: 30px;
   /*background-color: #f5f500;*/
@@ -58,7 +58,7 @@
 }
 
 .profile-button:hover {
-  background-color: #f1e209;
+  background-color: #F5A00F;
 }
 
 
