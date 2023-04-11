@@ -7,6 +7,7 @@ RUN git config --global user.name "svscumaci"
 RUN sudo apt -y install python3
 RUN sudo apt -y install python3-pip
 RUN apt-get -y install libpq-dev
-RUN nvm install node
+RUN sudo apt install node
+RUN sudo apt install nvm
 RUN pip install flask
 RUN flask run
