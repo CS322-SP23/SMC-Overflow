@@ -1,0 +1,20 @@
+{
+  "name": "smc-overflow",
+  "version": "1.0.0",
+  "description": "our app",
+  "main": "index.js",
+  "scripts": {
+    "dev": "python app.py",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CS322-SP23/SMC-Overflow.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CS322-SP23/SMC-Overflow/issues"
+  },
+  "homepage": "https://github.com/CS322-SP23/SMC-Overflow#readme"
+}
