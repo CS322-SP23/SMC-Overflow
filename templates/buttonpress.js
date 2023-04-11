@@ -1,16 +1,19 @@
-const questionform=document.getElementsByID("questionForm")
-const submit = document.getElementById("submitBtn");
-const category = document.getElementById("category");
-const message = document.getElementById("message");
-const title = document.getElementById("title");
+const form = document.getElementById('questionForm');
 
-const output = document.getElementById("output");
 
-questionform.addEventListener("click", function(event) {
+form.addEventListener('submit', function(event) {
+  // Prevent the form from submitting normally
   event.preventDefault();
-  const category = category.value;
-  const message = message.value;
-  const title =title.value
 
-  output.innerHTML = "Name: " + title + "<br>Message: " + message;
+  // Get the data from the form using the FormData object
+  const formData = new FormData(form);
+
+  for (let pair of formData.entries()) {
+    console.log(pair[0] + ': ' + pair[1]);
+  }
+  loadHomePage();
 });
+
+function loadHomePage(){
+  window.location.href = window.location.href.replace("/form", "");
+}
