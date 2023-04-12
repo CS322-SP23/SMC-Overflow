@@ -1,0 +1,16 @@
+{
+	"name": "SMC Overflow",
+	"dockerFile": "Dockerfile",
+	"appPort": 5000,
+	"extensions": [
+	  "ms-python.python",
+	  "github.github-vscode-theme",
+	  "ms-azuretools.vscode-docker",
+	  "vsciot-vscode.vscode-react",
+	  "vsciot-vscode.vscode-docker"
+	],
+	"settings": {
+	  "terminal.integrated.shell.linux": "/bin/bash"
+	}
+  }
+  

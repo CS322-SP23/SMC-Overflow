@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="#">
+    <title>Displaying posts from JSON file</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      #posts {
+        display: block;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+      }
+
+      .post {
+        margin-left: auto;
+        margin-right: auto;
+        width: calc(33.33% - 20px);
+        margin-bottom: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .post h2 {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 0;
+        padding: 20px;
+        background-color: #F5A00F;
+        color: #532884;
+      }
+
+      .post h3 {
+        font-size: 18px;
+        margin: 0;
+        padding: 10px;
+        margin-left:15px;
+        color: #880ca7;
+
+      }
+
+      .post p {
+        font-size: 16px;
+        margin: 0;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="posts"></div>
+
+    <script>
+      // Fetch the JSON data
+      fetch('../test_data/posts.json')
+        .then(response => response.json())
+        .then(posts => {
+          const postsDiv = document.getElementById('posts');
+
+          // Loop through the posts array
+          posts.reverse().forEach(post => {
+            // Create the HTML elements for each post
+            const postDiv = document.createElement('div');
+            postDiv.classList.add('post');
+            postDiv.innerHTML = `
+              <h2>${post.title}</h2>
+              <h3>${post.author}</h3>
+              <h3>Category: ${post.category}</h3>
+              <p>${post.content}</p>
+            `;
+
+            // Add the post to the page
+            postsDiv.appendChild(postDiv);
+          });
+        })
+        .catch(error => console.error(error));
+    </script>
+  </body>
+</html>
