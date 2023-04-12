@@ -11,9 +11,9 @@ def hello():
 def profile_page():
    return render_template("profile_page.html")
 
-@app.route('/form')
+@app.route('/form', methods=['GET', 'POST'])
 def form():
-    return render_template('form.html')
+   return render_template('form.html')
 
 if __name__ == '__main__':
    app.run()

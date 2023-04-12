@@ -43,23 +43,32 @@
     </style>
   </head>
   <body>
-    <form>
+    <form id="questionForm" method="post">
       <label for="title">Title:</label>
       <input type="text" id="title" name="title" required>
 
       <label for="category">Category:</label>
-      <select id="category" name="category">
-        <option value="select-value">Select a Value</option>
+      <select id="category" name="category" requried>
+        <option value="select-value" selected disabled>Select a Value</option>
         <option value="computer-science">Computer Science</option>
-        <option value="music">Music</option>
+        <option value="business">Business</option>
         <option value="math">Math</option>
+        <option value="biology">Biology</option>
+        <option value="psych">Psychology</option>
         <option value="english">English</option>
+        <option value="spanish">Spanish</option>
+        <option value="history">History</option>
       </select>
       
       <label for="message">Message:</label>
       <textarea id="message" name="message" required></textarea>
       
-      <button type="submit">Submit</button>
+      <button type="submit" id="submitBtn">Submit</button> 
+
     </form>
+
+    <script src="../javascript/buttonpress.js"></script>
+    <p id="output"></p>
+
   </body>
 </html>
