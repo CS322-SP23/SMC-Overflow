@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/CS322-SP23/SMC-Overflow/issues"
   },
-  "homepage": "https://github.com/CS322-SP23/SMC-Overflow#readme"
+  "homepage": "https://github.com/CS322-SP23/SMC-Overflow#readme",
+  "dependencies": {
+    "browserify": "^17.0.0"
+  }
 }

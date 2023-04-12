@@ -1,0 +1,14 @@
+[  
+    {   "title": "First post",    
+        "content": "This is the content of the first post.", 
+        "author": "KaiserWillhelm3" },  
+
+    {   "title": "Second post",   
+        "content": "This is the content of the second post.",
+        "author": "BongoBilly"  },  
+
+    {   "title": "Third post",    
+        "content": "This is the content of the third post.",
+        "author":  "RatatoingLover69" }
+
+]

@@ -11,3 +11,7 @@ def form():
    return render_template('form.html')
 if __name__ == '__main__':
    app.run()
+
+@app.route("/posts")
+def posts():
+    return render_template("posts.html")
