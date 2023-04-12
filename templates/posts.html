@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="shortcut icon" href="#">
     <title>Displaying posts from JSON file</title>
     <style>
       body {
@@ -33,15 +34,16 @@
         font-weight: bold;
         margin: 0;
         padding: 20px;
-        background-color: #333;
-        color: #fff;
+        background-color: #F5A00F;
+        color: #532884;
       }
 
       .post h3 {
         font-size: 18px;
         margin: 0;
-        padding: 20px;
-        color: #333;
+        padding: 10px;
+        margin-left:15px;
+        color: #880ca7;
 
       }
 
@@ -63,13 +65,14 @@
           const postsDiv = document.getElementById('posts');
 
           // Loop through the posts array
-          posts.forEach(post => {
+          posts.reverse().forEach(post => {
             // Create the HTML elements for each post
             const postDiv = document.createElement('div');
             postDiv.classList.add('post');
             postDiv.innerHTML = `
               <h2>${post.title}</h2>
               <h3>${post.author}</h3>
+              <h3>Category: ${post.category}</h3>
               <p>${post.content}</p>
             `;
 

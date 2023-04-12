@@ -9,6 +9,4 @@ RUN sudo apt -y install python3-pip
 RUN apt-get -y install libpq-dev
 RUN sudo apt -y install nodejs
 RUN sudo apt -y install npm
-#RUN npm install browserify
-#RUN pip install flask
-#RUN flask run
+RUN pip install flask

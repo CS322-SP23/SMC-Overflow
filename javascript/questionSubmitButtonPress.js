@@ -1,17 +1,20 @@
 
 const form = document.getElementById('questionForm');
-let postsjson = readFileSync("../test_data/posts.json","utf-8");
-let posts= json.parse(postsjson);
 
-form.addEventListener('submit', function(event) {
+form.addEventListener('submit', async (event) => {
   // Prevent the form from submitting normally
   event.preventDefault();
 
   // Get the data from the form using the FormData object
   const formData = new FormData(form);
 
-  const formDataJson = JSON.stringify(Object.fromEntries(formData.entries()));
-  posts.push(formDataJson);
+  const response = await fetch(window.location.href.replace("/form", "/new-post"), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(formData)
+  })
+
+  const data = await response.json();
   loadHomePage();
 });
 
