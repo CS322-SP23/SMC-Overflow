@@ -59,7 +59,7 @@
 
     <script>
       // Fetch the JSON data
-      fetch('../test_data/posts.json')
+      fetch('/data')
         .then(response => response.json())
         .then(posts => {
           const postsDiv = document.getElementById('posts');

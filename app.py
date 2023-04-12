@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, send_file
 import json
 
 app = Flask(__name__, static_folder="statics")
@@ -22,6 +22,16 @@ if __name__ == '__main__':
 @app.route("/posts")
 def posts():
     return render_template("posts.html")
+
+@app.route('/data')
+def get_data():
+    with open('test_data/posts.json', 'r') as f:
+        data = json.load(f)
+    return jsonify(data)
+
+@app.route('/questionSubmitButtonPress.js')
+def get_js():
+    return send_file('javascript/questionSubmitButtonPress.js', mimetype='application/javascript')
 
 @app.route('/new-post', methods=['POST'])
 def handle_new_post():
