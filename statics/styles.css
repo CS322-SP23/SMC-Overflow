@@ -1,13 +1,16 @@
-/*Corrected with ChatGPT*/
+/* CSS for Profile Page */
+
+/* Page Header */
 .header {
   text-align: center;
   font-family: Helvetica;
   font-weight: bold;
   color: #532884;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 1);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
   font-size: 4em;
 }
 
+/* Buttons */
 .button-container {
   display: flex;
   flex-direction: column;
@@ -35,17 +38,15 @@
   background-color: #532884;
   color: white;
   font-size: 30px;
-  /*background-color: #f5f500;*/
   transform: translateY(-2px);
 }
 
 .profile-button {
   font-family: 'Noto Sans', sans-serif;
   font-weight: bold;
-  font-size: 40;
+  font-size: 20px;
   margin: 5px;
   padding: 12px 24px;
-  font-size: 20px;
   background-color: transparent;
   color: black;
   border: none;
@@ -62,7 +63,78 @@
   background-color: #F5A00F;
 }
 
-
+/* Body */
 body {
-  background-color: white;
+  background-color: #ffffff;
+  font-family: Helvetica;
+  font-size: 16px;
+  line-height: 1.5;
 }
+.back-button{
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: bold;
+  margin: 5px;
+  margin-right: 93%;
+  padding: 12px 24px;
+  font-size: 20px;
+  background-color: #F5A00F;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.9);
+}
+
+/* Profile Container */
+.profile-container {
+  margin: 0;
+  padding: 20px;
+  background-color: #532884;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.9);
+  text-align: top, center;
+  font-size: 2em;
+}
+
+/* Form Container */
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 50px;
+  background-color: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+/* Form Header */
+h1 {
+  color: #F5A00F;
+  font-size: 60px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Username Input */
+.username {
+  margin-bottom: 20px;
+}
+
+.username label {
+  display: block;
+  font-size: 24px;
+  color: #F5A00F;
+  margin-bottom: 10px;
+}
+
+.username input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  background-color: #F5A00F;
+  color: #ffffff;
+}
+
+/* Certified Tutor Section */
+.certified-t
