@@ -2,7 +2,7 @@
 	"name": "Python Flask App",
 	"dockerFile": "Dockerfile",
 	"appPort": 5000,
-	// "postCreateCommand": "flask run --host=0.0.0.0 --port=5000",
+	"postCreateCommand": "flask run --host=0.0.0.0 --port=5000",
 	"extensions": [
 	  "ms-python.python",
 	  "github.github-vscode-theme",

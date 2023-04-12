@@ -1,6 +1,6 @@
-const fs = require("fs");
+
 const form = document.getElementById('questionForm');
-let postsjson = fs.readFileSync("../test_data/posts.json","utf-8");
+let postsjson = readFileSync("../test_data/posts.json","utf-8");
 let posts= json.parse(postsjson);
 
 form.addEventListener('submit', function(event) {
@@ -10,10 +10,8 @@ form.addEventListener('submit', function(event) {
   // Get the data from the form using the FormData object
   const formData = new FormData(form);
 
-  for (let pair of formData.entries()) {
-    console.log(pair[0] + ': ' + pair[1]);
-  }
-  posts.push(formData.entries);
+  const formDataJson = JSON.stringify(Object.fromEntries(formData.entries()));
+  posts.push(formDataJson);
   loadHomePage();
 });
 
