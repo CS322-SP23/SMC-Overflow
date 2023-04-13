@@ -1,4 +1,3 @@
-FROM ubuntu/postgres:14-22.04_edge
 RUN apt -y update && apt -y upgrade
 RUN apt install sudo
 RUN sudo apt -y install git
