@@ -1,0 +1,8 @@
+#!/bin/sh
+service postgresql start
+su - postgres -c "createdb smc"
+su - postgres -c "python3 /workspaces/SMC-Overflow/DBConfig.py"
+
+# chown -R smc:smc /workspaces
+
+echo "done"
