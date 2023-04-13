@@ -1,9 +1,14 @@
 FROM ubuntu:20.04
-ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt -y update && apt -y upgrade
 RUN apt install sudo
 RUN sudo apt -y install git
+
+
+RUN ln -snf /usr/share/zoneinfo/$CONTAINER_TIMEZONE /etc/localtime && echo $CONTAINER_TIMEZONE > /etc/timezone
+
+ARG DEBIAN_FRONTEND=noninteractive
+
 #RUN git config --global user.email "your email"
 #RUN git config --global user.name "your username"
 RUN sudo apt -y install python3
