@@ -1,6 +1,15 @@
+
 {
 	"name": "SMC Overflow",
-	"dockerFile": "Dockerfile",
+	// "dockerFile": "Dockerfile",
+	"build": {
+		// Sets the run context to one level up instead of the .devcontainer folder.
+		"context": "..",
+		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+		"dockerfile": "../Dockerfile",
+		// "args": {}
+		
+	},
 	"appPort": 5000,
 	"extensions": [
 		"ms-python.python",
@@ -12,6 +21,8 @@
 	],
 	"settings": {
 	  "terminal.integrated.shell.linux": "/bin/bash"
-	}
+	},
+
+	"postCreateCommand": "sh /workspaces/SMC-Overflow/setup"
   }
   
