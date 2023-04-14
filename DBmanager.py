@@ -20,8 +20,8 @@ class DBManager:
         pass
 
     def addUsername(self, user_id, username):
-        self.interface.execute(("INSERT INTO users (user_id, username) VALUES (%s, %s)", (user_id, username)))
-        pass
+        self.interface.execute("INSERT INTO users (user_id, username, role) VALUES (%s, %s, 'user')", (user_id, username))
+
 
     def getUsername(self,num):
         self.interface.execute("SELECT * FROM users ORDER BY user_id DESC LIMIT %s",(num,))
@@ -34,10 +34,10 @@ class DBManager:
 
 man = DBManager()
 
-man.addQuestion(1,"how are you?")
-man.addQuestion(2,"are you good?")
+# man.addQuestion(1,"how are you?")
+# man.addQuestion(2,"are you good?")
 print(man.getQuestions(20))
-    
 
-    
-        
+# man.addUsername(1, "man")
+# man.addUsername(2, "person")
+print(man.getUsername(2))
