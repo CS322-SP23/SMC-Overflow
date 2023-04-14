@@ -19,6 +19,13 @@ class DBManager:
         return(self.interface.cur.fetchall())
         pass
 
+    def addUsername(self, user_id, username):
+        self.interface.execute(("INSERT INTO users (user_id, username) VALUES (%s, %s)", (user_id, username)))
+        pass
+
+    def getUsername(self,num):
+        self.interface.execute("SELECT * FROM users ORDER BY user_id DESC LIMIT %s",(num,))
+        return self.interface.cur.fetchall()
 
 
 
