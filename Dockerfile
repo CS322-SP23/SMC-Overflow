@@ -19,13 +19,6 @@ RUN sudo apt -y install nodejs
 RUN pip install flask
 RUN pip install psycopg2-binary
 
-
-
-
-
-RUN sudo apt -y install python3
-RUN sudo apt -y install python3-pip
-
 # RUN apt-get install -y software-properties-common
 # RUN add-apt-repository universe
 # RUN apt-get update

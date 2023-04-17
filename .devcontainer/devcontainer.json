@@ -11,18 +11,21 @@
 		
 	},
 	"appPort": 5000,
-	"extensions": [
-		"ms-python.python",
-		"github.github-vscode-theme",
-		"ms-azuretools.vscode-docker",
-		"vsciot-vscode.vscode-react",
-		"vsciot-vscode.vscode-docker",
-		"philnash.ngrok-for-vscode"
-	],
-	"settings": {
-	  "terminal.integrated.shell.linux": "/bin/bash"
-	},
-
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+		  // Add the IDs of extensions you want installed when the container is created.
+		  "extensions": [
+			"ms-python.python",
+			"github.github-vscode-theme",
+			"ms-azuretools.vscode-docker",
+			"vsciot-vscode.vscode-react",
+			"vsciot-vscode.vscode-docker",
+			"philnash.ngrok-for-vscode"
+		]
+		}
+	  },
+	  
 	"postCreateCommand": "sh /workspaces/SMC-Overflow/setup"
   }
   
