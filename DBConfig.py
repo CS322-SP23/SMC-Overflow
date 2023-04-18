@@ -24,6 +24,9 @@ CREATE TABLE user_questions (
   question_id SERIAL PRIMARY KEY,
   user_id INTEGER NOT NULL,
   question TEXT NOT NULL,
+  rating INTEGER NOT NULL,
+  category VARCHAR(255),
+  title VARCHAR(255),
   created_at TIMESTAMP DEFAULT NOW()
 );
 """)
