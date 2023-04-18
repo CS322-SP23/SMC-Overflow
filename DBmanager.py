@@ -23,9 +23,10 @@ class DBManager:
         self.interface.execute("INSERT INTO users (user_id, username, role) VALUES (%s, %s, 'user')", (user_id, username))
 
 
-    def getUsername(self,num):
-        self.interface.execute("SELECT * FROM users ORDER BY user_id DESC LIMIT %s",(num,))
-        return self.interface.cur.fetchall()
+    def getUsername(self, num):
+        self.interface.execute("SELECT * FROM users WHERE user_id = %s", (num,))
+        return self.interface.cur.fetchone()
+
 
 
 
@@ -38,6 +39,6 @@ man = DBManager()
 # man.addQuestion(2,"are you good?")
 print(man.getQuestions(20))
 
-# man.addUsername(1, "man")
-# man.addUsername(2, "person")
-print(man.getUsername(2))
+#man.addUsername(1, "man")
+#man.addUsername(2, "person")
+print(man.getUsername(1))
