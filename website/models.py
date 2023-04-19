@@ -1,7 +1,6 @@
 from . import db
-from flask import current_app
 from flask_login import UserMixin
-from . import db
+from sqlalchemy.sql import func
 
 class TutorSubject(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -9,12 +8,11 @@ class TutorSubject(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key = True)
-    email = db.Column(db.String(150), unique =True)
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
-    certifiedTutor = db.relationship('TutorSubject')
+    certified_tutor = db.relationship('TutorSubject', backref='user')
 
-def create_database():
-    with current_app.app_context():
-        db.create_all()
-        print('Created Database!')
+# def create_database():
+#     db.create_all()
+#     print('Created Database!')

@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>My Profile Page</title>
-	<link rel="stylesheet" type="text/css" href="statics/styles.css">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
 	<div class="button-container">
@@ -15,18 +15,24 @@
 	</div>
 	<div class="main-container">
 		<div class="container">
-			<div class="username">
-				<label for="username">Username:</label>
-				<input type="text" id="username" name="username">
-			</div>
-			<div class="certified-tutor">
-				<p>Certified Tutor For:</p>
-				<ul>
-					<li>Subject 1</li>
-					<li>Subject 2</li>
-					<li>Subject 3</li>
-				</ul>
-			</div>
+			<div class="email">
+				<label for="email">Email:</label>
+				<p>{{ current_user.email }}</p>
+			</div>			
+			<h1 align="center">Subjects</h1>
+			<ul class="list-group list-group-flush" id="TutorSubject">
+				{% for subject in current_user.tutor_subjects %}
+				<li class="list-group-item">{{ subject }}</li>
+				{% endfor %}
+			</ul>
+			<form method="POST">
+				<label for="subject">Add Subject:</label>
+				<textarea name="subject" id="subject" class="form-control"></textarea> 
+				<br />
+				<div align="center">
+					<button type="submit" class="btn btn-primary">Add subject</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </body>
