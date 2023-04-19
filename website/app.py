@@ -1,8 +1,13 @@
 from flask import Flask, jsonify, render_template, request, send_file
 import json
 
-app = Flask(__name__, static_folder="statics")
-app.config['DEBUG'] = True
+def create_app():
+    app = Flask(__name__, static_folder="statics")
+    app.config['DEBUG'] = True
+    app.config['SECRET KEY'] = 'SFKAMSOMOENFASO3F'
+    return app
+
+app = create_app()
 
 @app.route("/")
 def hello():
