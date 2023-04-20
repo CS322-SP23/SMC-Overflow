@@ -1,5 +1,5 @@
 import psycopg2
-
+import psycopg2.extras
 
 class DBInterface:
 
@@ -12,6 +12,7 @@ class DBInterface:
 
 
         self.cur = self.conn.cursor()
+        self.dict_cur  = self.conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
     def getVersion(self):
         return self.cur.fetchone();

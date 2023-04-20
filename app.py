@@ -26,8 +26,11 @@ def posts():
 
 @app.route('/data')
 def get_data():
-    with open('test_data/posts.json', 'r') as f:
-        data = json.load(f)
+    # with open('test_data/posts.json', 'r') as f:
+    #     data = json.load(f)
+    
+    # print(data)
+    data = database_manager.getQuestions(10,"*")
     return jsonify(data)
 
 @app.route('/questionSubmitButtonPress.js')
