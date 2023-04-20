@@ -36,7 +36,6 @@ def logout():
 def sign_up():
     if request.method == 'POST':
         email = request.form.get('email')
-        first_name = request.form.get('firstName')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
@@ -67,3 +66,7 @@ def profile_page():
 @auth.route('/form', methods=['GET', 'POST'])
 def form():
    return render_template('form.html')
+
+@auth.route("/posts")
+def posts():
+    return render_template("posts.html")

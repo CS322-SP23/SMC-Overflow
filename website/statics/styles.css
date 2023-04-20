@@ -17,7 +17,8 @@
   margin-top: 10px;
 }
 
-.submit-button, .back-button {
+.submit-button,
+.back-button {
   font-family: 'Noto Sans', sans-serif;
   font-weight: bold;
   margin: 5px;
@@ -35,7 +36,8 @@
   align-items: center;
 }
 
-.submit-button:hover, .back-button:hover {
+.submit-button:hover,
+.back-button:hover {
   background-color: #532884;
   color: white;
   font-size: 30px;
@@ -71,7 +73,8 @@ body {
   font-size: 16px;
   line-height: 1.5;
 }
-.back-button{
+
+.back-button {
   font-family: 'Noto Sans', sans-serif;
   font-weight: bold;
   margin: 5px;
@@ -93,8 +96,9 @@ body {
   padding: 20px;
   background-color: #532884;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.9);
-  text-align: top, center;
+  text-align: center;
   font-size: 2em;
+  color: white;
 }
 
 /* Form Container */
@@ -107,27 +111,20 @@ body {
   border-radius: 8px;
 }
 
-/* Form Header */
-h1 {
-  color: #F5A00F;
-  font-size: 60px;
-  text-align: center;
-  margin-bottom: 30px;
-}
-
+/* Form Header
 /* Username Input */
 .username {
   margin-bottom: 20px;
-}
-
-.username label {
+  }
+  
+  .username label {
   display: block;
   font-size: 24px;
   color: #F5A00F;
   margin-bottom: 10px;
-}
-
-.username input[type="text"] {
+  }
+  
+  .username input[type="text"] {
   width: 100%;
   padding: 10px;
   font-size: 18px;
@@ -135,7 +132,145 @@ h1 {
   border-radius: 5px;
   background-color: #F5A00F;
   color: #ffffff;
-}
+  }
+  
+  /* Password Input */
+  .password {
+  margin-bottom: 20px;
+  }
+  
+  .password label {
+  display: block;
+  font-size: 24px;
+  color: #F5A00F;
+  margin-bottom: 10px;
+  }
+  
+  .password input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  background-color: #F5A00F;
+  color: #ffffff;
+  }
+  
+  /* Email Input */
+  .email {
+  margin-bottom: 20px;
+  }
+  
+  .email label {
+  display: block;
+  font-size: 24px;
+  color: #F5A00F;
+  margin-bottom: 10px;
+  }
+  
+  .email input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  background-color: #F5A00F;
+  color: #ffffff;
+  }
+  
+  /* Checkbox Input */
+  .checkbox {
+  margin-bottom: 20px;
+  }
+  
+  .checkbox label {
+  display: block;
+  font-size: 24px;
+  color: #F5A00F;
+  margin-bottom: 10px;
+  }
+  
+  .checkbox input[type="checkbox"] {
+  margin-right: 10px;
+  }
+  
+  /* Submit Button */
+  .submit-button {
+  margin-top: 30px;
+  font-size: 24px;
+  background-color: #532884;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  }
+  
+  .submit-button:hover {
+  background-color: #F5A00F;
+  }
+  
+  /* Error Message */
+  .error-message {
+  color: red;
+  font-size: 18px;
+  margin-top: 10px;
+  }
+  
+  /* Success Message */
+  .success-message {
+  color: green;
+  font-size: 18px;
+  margin-top: 10px;
+  }
 
-/* Certified Tutor Section */
-.certified-t
+  /* Profile Container */
+.profile-container {
+  margin: 0;
+  padding: 20px;
+  background-color: #532884;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.9);
+  text-align: center;
+  font-size: 2em;
+  }
+  
+  /* Form Container */
+  .container {
+  max-width: 800px;
+  margin: auto;
+  padding: 50px;
+  background-color: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  }
+  
+  /* Form Header */
+  h1 {
+  color: #F5A00F;
+  font-size: 60px;
+  text-align: center;
+  margin-bottom: 30px;
+  }
+  
+  /* Username Input */
+  .username {
+  margin-bottom: 20px;
+  }
+  
+  .username label {
+  display: block;
+  font-size: 24px;
+  color: #F5A00F;
+  margin-bottom: 10px;
+  }
+  
+  .username input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  background-color: #F5A00F;
+  color: #ffffff;
+  }
