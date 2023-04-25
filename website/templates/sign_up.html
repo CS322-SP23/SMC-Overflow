@@ -1,7 +1,94 @@
 <!DOCTYPE html>
+<style>
+  /* Page Header */
+  .header {
+      text-align: center;
+      font-family: Helvetica;
+      font-weight: bold;
+      color: #532884;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+      font-size: 4em;
+    }
+
+    /* Email Input */
+    .Email {
+  margin-bottom: 20px;
+  }
+  
+  .Email label {
+  display: block;
+  font-size: 24px;
+  color: #532884;
+  margin-bottom: 10px;
+  }
+  
+  .Email input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  background-color: #F5A00F;
+  color: #ffffff;
+  }
+
+      /* Password Input */
+    .password {
+    margin-bottom: 20px;
+    }
+  
+  .password label {
+  display: block;
+  font-size: 24px;
+  color: #532884;
+  margin-bottom: 10px;
+  }
+  
+  .password input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  background-color: #F5A00F;
+  color: #ffffff;
+  }
+
+  .login-button {
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: bold;
+  margin: 5px;
+  padding: 8px 8px;
+  font-size: 30px;
+  background-color: #F5A00F;
+  color: #532884;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  
+}
+.sign-up-button {
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: bold;
+  margin: 5px;
+  padding: 8px 8px;
+  font-size: 30px;
+  background-color: #F5A00F;
+  color:#532884;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  
+}
+  </style>
 <form method = "POST">
+  <div class = "header"
     <h3 align = "center">Sign Up</h3>
-    <div class = "form-group">
+    </div> 
+
+    <div class = "Email">
         <label for="email">Email Address</label>
         <input 
         type = "email"
@@ -12,8 +99,8 @@
         />
     </div>
 
-    <div class = "form-group">
-        <label for="password1">password</label>
+    <div class = "password">
+        <label for="password1">assword</label>
         <input 
         type = "password"
         class = "form-control"
@@ -23,8 +110,8 @@
         />
     </div>
 
-    <div class = "form-group">
-        <label for="password2">(Confirm)password</label>
+    <div class = "password">
+        <label for="password2">(Confirm) Password</label>
         <input 
         type = "password"
         class = "form-control"
@@ -34,8 +121,7 @@
         />
     </div>
     <br />
-    <button type="submit" class = "btn btn-primary">Submit</button>
-    <br /> 
-    <a href="/login" class="btn btn-primary">Login</a>
+    <button type="submit" class = "sign-up-button">Submit</button> 
+    <a href="/login" class="login-button">Login</a>
 
 </form>
