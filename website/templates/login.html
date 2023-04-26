@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<style>
+    /* Email Input */
+    .Email {
+  margin-bottom: 20px;
+  }
+  
+  .Email label {
+  display: block;
+  font-size: 24px;
+  color: #532884;
+  margin-bottom: 10px;
+  }
+  
+  .Email input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  background-color: #F5A00F;
+  color: #ffffff;
+  }
+
+    /* Password Input */
+  .password {
+  margin-bottom: 20px;
+  }
+  
+  .password label {
+  display: block;
+  font-size: 24px;
+  color: #532884;
+  margin-bottom: 10px;
+  }
+  
+  .password input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  background-color: #F5A00F;
+  color: #ffffff;
+  }
+
+  .sign-up-button {
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: bold;
+  margin: 5px;
+  padding: 8px 8px;
+  font-size: 30px;
+  background-color: #F5A00F;
+  color:#532884;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  
+}
+.login-button {
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: bold;
+  margin: 5px;
+  padding: 8px 8px;
+  font-size: 30px;
+  background-color: #F5A00F;
+  color: #532884;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  
+}
+    </style>
+<form method = "POST">
+    <div class = "Email">
+        <label for="email">Email Address</label>
+        <input 
+        type = "email"
+        class = "form-control"
+        id = "email"
+        name = "email"
+        placeholder="Enter Email"
+        />
+    </div>
+
+    <div class = "password">
+        <label for="password">Password</label>
+        <input 
+        type = "password"
+        class = "form-control"
+        id = "password"
+        name = "password"
+        placeholder="Enter password"
+        />
+    </div>
+
+    <br />
+    <button type="submit" class = "login-button">Login</button>
+    <a href="/sign-up" class="sign-up-button">Sign Up</a>
+</form>
