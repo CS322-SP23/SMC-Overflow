@@ -1,9 +1,13 @@
 from flask import Flask, jsonify, render_template, request, send_file
 import json
-import DBmanager
-database_manager = DBmanager.DBManager()
-app = Flask(__name__, static_folder="statics")
-app.config['DEBUG'] = True
+
+def create_app():
+    app = Flask(__name__, static_folder="statics")
+    app.config['DEBUG'] = True
+    app.config['SECRET KEY'] = 'SFKAMSOMOENFASO3F'
+    return app
+
+app = create_app()
 
 @app.route("/")
 def hello():
@@ -26,11 +30,8 @@ def posts():
 
 @app.route('/data')
 def get_data():
-    # with open('test_data/posts.json', 'r') as f:
-    #     data = json.load(f)
-    
-    # print(data)
-    data = database_manager.getQuestions(10,"*")
+    with open('test_data/posts.json', 'r') as f:
+        data = json.load(f)
     return jsonify(data)
 
 @app.route('/questionSubmitButtonPress.js')
@@ -45,15 +46,14 @@ def handle_new_post():
     return jsonify({'success': True})
 
 def newPost(title, text, category):
-    database_manager.addQuestion(1,title,text,category)
-    pass 
-#    new_data={'title': title, 'content':text, 'category':category, 'author':"User"}
-#    with open('test_data/posts.json','r+') as file:
-#           # First we load existing data into a dict.
-#         file_data = json.load(file)
-#         # Join new_data with file_data inside emp_details
-#         file_data.append(new_data)
-#         # Sets file's current position at offset.
-#         file.seek(0)
-#         # convert back to json.
-#         json.dump(file_data, file, indent = 4)
+     
+   new_data={'title': title, 'content':text, 'category':category, 'author':"User"}
+   with open('test_data/posts.json','r+') as file:
+          # First we load existing data into a dict.
+        file_data = json.load(file)
+        # Join new_data with file_data inside emp_details
+        file_data.append(new_data)
+        # Sets file's current position at offset.
+        file.seek(0)
+        # convert back to json.
+        json.dump(file_data, file, indent = 4)
