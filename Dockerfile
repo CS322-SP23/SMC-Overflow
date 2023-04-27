@@ -17,7 +17,7 @@ RUN apt-get -y install libpq-dev
 RUN sudo apt -y install nodejs
 #RUN sudo apt -y install npm
 RUN pip install flask
-RUN pip instal flask-login
+RUN pip install flask-login
 RUN pip install flask-sqlalchemy
 RUN pip install psycopg2-binary
 
