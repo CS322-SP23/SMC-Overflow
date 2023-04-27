@@ -40,7 +40,8 @@ CREATE TABLE users (
   date_created TIMESTAMP DEFAULT NOW(),
   role VARCHAR(255) NOT NULL,
   email VARCHAR(255),
-  last_login TIMESTAMP
+  last_login TIMESTAMP,
+  hash VARBINARY(32)
 );
 """)
 

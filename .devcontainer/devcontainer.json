@@ -2,6 +2,8 @@
 {
 	"name": "SMC Overflow",
 	// "dockerFile": "Dockerfile",
+	// "runArgs": ["-p=5000:5000"],
+
 	"build": {
 		// Sets the run context to one level up instead of the .devcontainer folder.
 		"context": "..",
@@ -10,7 +12,8 @@
 		// "args": {}
 		
 	},
-	"appPort": 5000,
+	// "forwardPorts": [5000],
+  	"appPort": "5000:8080",
 	"customizations": {
 		// Configure properties specific to VS Code.
 		"vscode": {
