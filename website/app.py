@@ -1,5 +1,8 @@
 from flask import Flask, jsonify, render_template, request, send_file
 import json
+import DBmanager
+
+database_manager = DBmanager.DBManager()
 
 def create_app():
     app = Flask(__name__, static_folder="statics")
@@ -30,11 +33,10 @@ def posts():
 
 @app.route('/data')
 def get_data():
-    with open('test_data/posts.json', 'r') as f:
-        data = json.load(f)
+    data = database_manager.getQuestions(10,"*")
     return jsonify(data)
 
-@app.route('/questionSubmitButtonPress.js')
+@app.route('/buttonPressScript')
 def get_js():
     return send_file('javascript/questionSubmitButtonPress.js', mimetype='application/javascript')
 
@@ -46,14 +48,5 @@ def handle_new_post():
     return jsonify({'success': True})
 
 def newPost(title, text, category):
-     
-   new_data={'title': title, 'content':text, 'category':category, 'author':"User"}
-   with open('test_data/posts.json','r+') as file:
-          # First we load existing data into a dict.
-        file_data = json.load(file)
-        # Join new_data with file_data inside emp_details
-        file_data.append(new_data)
-        # Sets file's current position at offset.
-        file.seek(0)
-        # convert back to json.
-        json.dump(file_data, file, indent = 4)
+    database_manager.addQuestion(1,title,text,category)
+    pass 
