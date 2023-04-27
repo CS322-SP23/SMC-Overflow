@@ -1,23 +1,27 @@
-from flask import Flask, jsonify, render_template, request, send_file
+from flask import Flask, jsonify, render_template, request, send_file,redirect
 import json
-import DBmanager
+from .DBmanager import database_manager
+from .auth import auth
+from . import create_app
 
-database_manager = DBmanager.DBManager()
+# def create_app():
+#     app = Flask(__name__, static_folder="statics")
+#     app.config['DEBUG'] = True
+#     app.config['SECRET KEY'] = 'SFKAMSOMOENFASO3F'
 
-def create_app():
-    app = Flask(__name__, static_folder="statics")
-    app.config['DEBUG'] = True
-    app.config['SECRET KEY'] = 'SFKAMSOMOENFASO3F'
-    return app
+
+
+#     return app
 
 app = create_app()
+# app.register_blueprint(auth)
 
-@app.route("/")
+@app.route("/index")
 def hello():
     return render_template("index.html")
 
 @app.route('/profile_page')
-def profile_page():
+def profile_page(): 
    return render_template("profile_page.html")
 
 @app.route('/form', methods=['GET', 'POST'])
@@ -45,7 +49,8 @@ def handle_new_post():
     data = request.form.to_dict()
     # Call the newPost function with the form data
     newPost(data['title'], data['content'], data['category'])
-    return jsonify({'success': True})
+    # return jsonify({'success': True})
+    return redirect("/posts")
 
 def newPost(title, text, category):
     database_manager.addQuestion(1,title,text,category)
