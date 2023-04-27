@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, render_template, request, send_file,redirect
 import json
 from .DBmanager import database_manager
+from flask_login import current_user, login_required
+
 from .auth import auth
 from . import create_app
 
@@ -18,7 +20,10 @@ app = create_app()
 
 @app.route("/index")
 def hello():
-    return render_template("index.html")
+    if current_user.is_authenticated:
+        return render_template("index.html")
+    else:
+        return redirect("/login")
 
 @app.route('/profile_page')
 def profile_page(): 
