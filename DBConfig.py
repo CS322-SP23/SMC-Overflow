@@ -24,6 +24,9 @@ CREATE TABLE user_questions (
   question_id SERIAL PRIMARY KEY,
   user_id INTEGER NOT NULL,
   question TEXT NOT NULL,
+  rating INTEGER NOT NULL,
+  category VARCHAR(255),
+  title VARCHAR(255),
   created_at TIMESTAMP DEFAULT NOW()
 );
 """)
@@ -37,7 +40,8 @@ CREATE TABLE users (
   date_created TIMESTAMP DEFAULT NOW(),
   role VARCHAR(255) NOT NULL,
   email VARCHAR(255),
-  last_login TIMESTAMP
+  last_login TIMESTAMP,
+  hash VARBINARY(32)
 );
 """)
 
