@@ -1,102 +1,120 @@
 <!DOCTYPE html>
-<style>
-    /* Email Input */
-    .Email {
-  margin-bottom: 20px;
-  }
-  
-  .Email label {
-  display: block;
-  font-size: 24px;
-  color: #532884;
-  margin-bottom: 10px;
-  }
-  
-  .Email input[type="email"] {
-  width: 100%;
-  padding: 10px;
-  font-size: 18px;
-  border: none;
-  border-radius: 5px;
-  background-color: #F5A00F;
-  color: #ffffff;
-  }
+<html>
+  <head>
+    <title>Login Form</title>
+    <style>
+      /* Email Input */
+      .Email {
+        margin-bottom: 20px;
+      }
 
-    /* Password Input */
-  .password {
-  margin-bottom: 20px;
-  }
-  
-  .password label {
-  display: block;
-  font-size: 24px;
-  color: #532884;
-  margin-bottom: 10px;
-  }
-  
-  .password input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  font-size: 18px;
-  border: none;
-  border-radius: 5px;
-  background-color: #F5A00F;
-  color: #ffffff;
-  }
+      .Email label {
+        display: block;
+        font-size: 24px;
+        color: #532884;
+        margin-bottom: 10px;
+      }
 
-  .sign-up-button {
-  font-family: 'Noto Sans', sans-serif;
-  font-weight: bold;
-  margin: 5px;
-  padding: 8px 8px;
-  font-size: 30px;
-  background-color: #F5A00F;
-  color:#532884;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  
-}
-.login-button {
-  font-family: 'Noto Sans', sans-serif;
-  font-weight: bold;
-  margin: 5px;
-  padding: 8px 8px;
-  font-size: 30px;
-  background-color: #F5A00F;
-  color: #532884;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  
-}
+      .Email input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        background-color: #f5a00f;
+        color: #ffffff;
+      }
+
+      /* Password Input */
+      .password {
+        margin-bottom: 20px;
+      }
+
+      .password label {
+        display: block;
+        font-size: 24px;
+        color: #532884;
+        margin-bottom: 10px;
+      }
+
+      .password input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        background-color: #f5a00f;
+        color: #ffffff;
+      }
+
+      .sign-up-button {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+        margin: 5px;
+        padding: 8px 8px;
+        font-size: 30px;
+        background-color: #f5a00f;
+        color: #532884;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .login-button {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+        margin: 5px;
+        padding: 8px 8px;
+        font-size: 30px;
+        background-color: #f5a00f;
+        color: #532884;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .sign-up-question label {
+        display: block;
+        font-size: 24px;
+        color: #532884;
+        margin-bottom: 10px;
+      }
     </style>
-<form method = "POST">
-    <div class = "Email">
+  </head>
+  <body>
+    <form method="POST">
+      <div class="Email">
         <label for="email">Email Address</label>
-        <input 
-        type = "email"
-        class = "form-control"
-        id = "email"
-        name = "email"
-        placeholder="Enter Email"
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="Enter Email"
         />
-    </div>
+      </div>
 
-    <div class = "password">
+      <div class="password">
         <label for="password">Password</label>
-        <input 
-        type = "password"
-        class = "form-control"
-        id = "password"
-        name = "password"
-        placeholder="Enter password"
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="Enter password"
         />
-    </div>
+      </div>
 
-    <br />
-    <button type="submit" class = "login-button">Login</button>
-    <a href="/sign-up" class="sign-up-button">Sign Up</a>
-</form>
+      <br />
+      <button type="submit" class="login-button">Login</button>
+      <br />
+      <div class="sign-up-question">
+        <label for="sign-up-label">Don't have an account? Click Sign Up.</label>
+      </div>
+      <br />
+      <a href="/sign-up" class="sign-up-button">Sign Up</a>
+    </form>
+  </body>
+</html>
