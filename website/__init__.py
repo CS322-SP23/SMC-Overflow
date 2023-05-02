@@ -1,18 +1,18 @@
 from flask import Flask 
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
+from .DBmanager import database_manager
+# db = SQLAlchemy()
 
-db = SQLAlchemy()
-
-DB_NAME = "database.db"
+# DB_NAME = "database.db"
 
 def create_app():
     app = Flask(__name__, static_folder="static")
     app.config['SECRET_KEY'] = 'SFKAMSOMOENFASO3F'
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     
-    db.init_app(app)
+    # db.init_app(app)
 
     from .views import views
     from .auth import auth
@@ -22,8 +22,8 @@ def create_app():
 
     from .models import User, TutorSubject
     
-    with app.app_context():
-        create_database()
+    # with app.app_context():
+    #     create_database()
     # create_database(app)
 
     login_manager = LoginManager()
@@ -32,11 +32,11 @@ def create_app():
 
     @login_manager.user_loader
     def load_user(id):
-        return User.query.get(int(id))
+        return database_manager.getUser(user_ID=id)
 
     return app
 
-def create_database():
-    if not path.exists('website/' + DB_NAME):
-        db.create_all()
-        print('Created Database!')
+# def create_database():
+#     if not path.exists('website/' + DB_NAME):
+#         db.create_all()
+#         print('Created Database!')

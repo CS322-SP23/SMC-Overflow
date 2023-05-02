@@ -1,23 +1,32 @@
-from flask import Flask, jsonify, render_template, request, send_file
+from flask import Flask, jsonify, render_template, request, send_file,redirect,url_for,escape
 import json
-import DBmanager
+from .DBmanager import database_manager
+from flask_login import current_user, login_required
 
-database_manager = DBmanager.DBManager()
+from .auth import auth
+from . import create_app
 
-def create_app():
-    app = Flask(__name__, static_folder="statics")
-    app.config['DEBUG'] = True
-    app.config['SECRET KEY'] = 'SFKAMSOMOENFASO3F'
-    return app
+# def create_app():
+#     app = Flask(__name__, static_folder="statics")
+#     app.config['DEBUG'] = True
+#     app.config['SECRET KEY'] = 'SFKAMSOMOENFASO3F'
+
+
+
+#     return app
 
 app = create_app()
+# app.register_blueprint(auth)
 
-@app.route("/")
+@app.route("/index")
 def hello():
-    return render_template("index.html")
+    if current_user.is_authenticated:
+        return render_template("index.html")
+    else:
+        return redirect("/login")
 
 @app.route('/profile_page')
-def profile_page():
+def profile_page(): 
    return render_template("profile_page.html")
 
 @app.route('/form', methods=['GET', 'POST'])
@@ -44,9 +53,13 @@ def get_js():
 def handle_new_post():
     data = request.form.to_dict()
     # Call the newPost function with the form data
-    newPost(data['title'], data['content'], data['category'])
-    return jsonify({'success': True})
+    print(current_user.user_id)
+    newPost(current_user.user_id,escape(data['title']), escape(data['content']), escape(data['category']))
+    # return jsonify({'success': True})
+    #return redirect("/posts")
+    return redirect("/posts")
 
-def newPost(title, text, category):
-    database_manager.addQuestion(1,title,text,category)
+
+def newPost(id,title, text, category):
+    database_manager.addQuestion(id,title,text,category)
     pass 
