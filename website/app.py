@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request, send_file,redirect
+from flask import Flask, jsonify, render_template, request, send_file,redirect,url_for,escape
 import json
 from .DBmanager import database_manager
 from flask_login import current_user, login_required
@@ -53,10 +53,13 @@ def get_js():
 def handle_new_post():
     data = request.form.to_dict()
     # Call the newPost function with the form data
-    newPost(data['title'], data['content'], data['category'])
+    print(current_user.user_id)
+    newPost(current_user.user_id,escape(data['title']), escape(data['content']), escape(data['category']))
     # return jsonify({'success': True})
+    #return redirect("/posts")
     return redirect("/posts")
 
-def newPost(title, text, category):
-    database_manager.addQuestion(1,title,text,category)
+
+def newPost(id,title, text, category):
+    database_manager.addQuestion(id,title,text,category)
     pass 
