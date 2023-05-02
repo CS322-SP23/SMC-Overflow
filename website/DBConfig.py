@@ -45,6 +45,13 @@ CREATE TABLE users (
 );
 """)
 
+cur.execute("""
+CREATE TABLE user_votes (
+  user_id SERIAL PRIMARY KEY,
+  question_id SERIAL PRIMARY KEY,
+  vote BIT
+);
+""")
 
 cur.close()
 conn.close()

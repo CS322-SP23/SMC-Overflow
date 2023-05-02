@@ -49,6 +49,41 @@ class DBManager:
         return None
         # return self.interface.cur.fetchone()
 
+    def getVotes(self, question_ID):
+        self.interface.execute("SELECT COUNT(*) FROM user_votes WHERE question_id=%s AND vote=1", (question_ID))
+        upvotes=self.interface.cur.fetchone()
+        self.interface.execute("SELECT COUNT(*) FROM user_votes WHERE question_id=%s AND vote=0", (question_ID))
+        downvotes=self.interface.cur.fetchone()
+        return upvotes-downvotes
+    
+    def hasVoted(self, question_ID, user_ID):
+        self.interface.execute("SELECT vote FROM user_votes WHERE question_ID=%s AND user_id=%s", (question_ID, user_ID))
+        row=self.interface.cur.fetchone()
+        if row is None:
+            return False
+        else:
+            return True
+    
+    def submitVote(self, question_id, user_ID, vote):
+        if self.hasVoted(question_id, user_ID)==False:
+            self.interface.execute("INSERT INTO user_votes (question_id, user_id,vote) VALUES (%s,%s,%s)", (question_id,user_ID,vote))
+        else:
+            self.interface.execute("SELECT vote FROM user_votes WHERE question_ID=%s AND user_id=%s", (question_id, user_ID))
+            row=self.interface.cur.fetchone()
+            if vote==0:                                                                                                                    #Updating rating to reflect new state
+                self.interface.execute("UPDATE user_questions SET rating = rating + 1 WHERE question_id=%s", (question_id))
+            elif vote==1:
+                self.interface.execute("UPDATE user_questions SET rating = rating - 1 WHERE question_id=%s", (question_id))
+
+            self.interface.execute("DELETE FROM user_votes WHERE question_id=%s AND user_id=%s", (question_id,user_ID))                     #Clearing out the old vote
+            self.interface.execute("INSERT INTO user_votes (question_id, user_id,vote) VALUES (%s,%s,%s)", (question_id,user_ID,vote))      #New vote
+        if vote==0:
+            self.interface.execute("UPDATE user_questions SET rating = rating - 1 WHERE question_id=%s", (question_id))                     #Making rating reflect new vote
+        elif vote==1:
+            self.interface.execute("UPDATE user_questions SET rating = rating + 1 WHERE question_id=%s", (question_id))
+
+        
+
 database_manager = DBManager()
 
 
