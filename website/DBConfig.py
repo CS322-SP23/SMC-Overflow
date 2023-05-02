@@ -41,7 +41,7 @@ CREATE TABLE users (
   role VARCHAR(255) NOT NULL,
   email VARCHAR(255),
   last_login TIMESTAMP,
-  hash VARBINARY(32)
+  hash VARCHAR(150)
 );
 """)
 
