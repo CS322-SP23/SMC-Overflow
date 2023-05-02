@@ -19,7 +19,7 @@ def login():
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
                 print("log in done")
-                return redirect("/index")
+                return redirect('/')
             else:
                 print("bad login")
                 flash('Incorrect password, try again.', category='error')
@@ -88,7 +88,6 @@ def form():
 @auth.route("/posts")
 def posts():
     return render_template("posts.html")
-
 
 
 
