@@ -47,9 +47,10 @@ CREATE TABLE users (
 
 cur.execute("""
 CREATE TABLE user_votes (
-  user_id SERIAL PRIMARY KEY,
-  question_id SERIAL PRIMARY KEY,
-  vote BIT
+  user_id INTEGER,
+  question_id INTEGER,
+  vote BIT,
+  PRIMARY KEY(question_id, user_id)
 );
 """)
 

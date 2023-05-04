@@ -63,3 +63,13 @@ def handle_new_post():
 def newPost(id,title, text, category):
     database_manager.addQuestion(id,title,text,category)
     pass 
+
+@app.route('/increase-rating/<postID>')
+def increase_rating(postID):
+    database_manager.submitVote(postID, current_user.user_id, 1)
+    return
+
+@app.route('/decrease-rating/<postID>')
+def decrease(postID):
+    database_manager.submitVote(postID, current_user.user_id, 0)
+    return

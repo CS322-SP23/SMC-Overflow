@@ -74,9 +74,9 @@
               <h3>${post.username}</h3>
               <h3>Category: ${post.category}</h3>
               <p>${post.question}</p>
-              <p>Rating: <span class="rating" data-post-id="${post.id}">${post.rating}</span></p>
-              <button onclick="increaseRating()">Increase Rating</button>
-              <button onclick="decreaseRating()">Decrease Rating</button>
+              <p>Rating: <span class="rating" data-post-id="${post.question_id}">${post.rating}</span></p>
+              <button onclick="increaseRating(${post.question_id})">Increase Rating</button>
+              <button onclick="decreaseRating(${post.question_id})">Decrease Rating</button>
             `;
 
             // Add the post to the page
