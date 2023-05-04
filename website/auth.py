@@ -76,10 +76,6 @@ def sign_up():
 
     return render_template("sign_up.html", user=current_user)
     
-@auth.route('/profile_page')
-@login_required
-def profile_page():
-   return render_template("profile_page.html")
 
 @auth.route('/form', methods=['GET', 'POST'])
 def form():
@@ -89,7 +85,28 @@ def form():
 def posts():
     return render_template("posts.html")
 
+@auth.route('/profile_page', methods=['GET', 'POST'])
+@login_required
+def profile_page():
+    # print(User.get_id(current_user))
+    user_id = User.get_id(current_user)
+    print(database_manager.getTutorSubjects(user_id))
+    subjects = database_manager.getTutorSubjects(user_id)
+    if request.method == 'POST':
+        # Handle form submission for adding a subject
+        subject = request.form['subject']
+        database_manager.addSubject(subject, user_id)
+        subjects = database_manager.getTutorSubjects(user_id) # Update list of subjects
+    print(database_manager.getTutorSubjects(user_id))  # print the user's subjects
+    return render_template('profile_page.html', user=current_user, subjects=subjects)
 
+
+@auth.route('/add_subject', methods=['POST'])
+@login_required
+def add_subject():
+    subject = request.form['subject']
+    database_manager.add_subject(subject)
+    return redirect('/profile_page')
 
 # class Authenticator():
 

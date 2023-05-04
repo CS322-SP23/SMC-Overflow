@@ -45,7 +45,8 @@
 		</style>
 <head>
 	<title>My Profile Page</title>
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+	<link rel="stylesheet" href="../statics/styles.css">
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap">
 </head>
 <body>
 	<div class="button-container">
@@ -68,14 +69,17 @@
 				<li class="list-group-item">{{ subject }}</li>
 				{% endfor %}
 			</ul>
-			<form method="POST">
-				<label for="subject">Add Subject:</label>
-				<textarea name="subject" id="subject" class="form-control"></textarea> 
-				<br />
-				<div align="center">
-					<button type="submit" class="btn btn-primary">Add subject</button>
-				</div>
-			</form>
+			<h2>Add a subject</h2>
+				<form method="POST" action="{{ url_for('auth.profile_page') }}">
+				<input type="text" name="subject" placeholder="Enter subject name" required>
+				<button type="submit">Add</button>
+				</form>
+			<h2>Subjects</h2>
+				<ul>
+				{% for subject in subjects %}
+					<li>{{ subject }}</li>
+				{% endfor %}
+				</ul>
 		</div>
 	</div>
 </body>

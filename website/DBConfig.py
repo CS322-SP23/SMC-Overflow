@@ -45,6 +45,30 @@ CREATE TABLE users (
 );
 """)
 
+cur.execute("""
+CREATE TABLE subjects (
+  subject_id SERIAL PRIMARY KEY,
+  subject_name TEXT NOT NULL
+);
+""")
+
+cur.execute("""
+CREATE TABLE user_subject_mapping (
+  user_subject_mapping_id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL REFERENCES users(user_id),
+  subject_id INTEGER NOT NULL REFERENCES subjects(subject_id),
+  UNIQUE (user_id, subject_id)
+);
+""")
+
+# cur.execute("""
+# ALTER TABLE user_subject_mapping DROP COLUMN subject_id;
+# ALTER TABLE subjects ADD COLUMN subject_id SERIAL PRIMARY KEY;
+# ALTER TABLE user_subject_mapping 
+#   DROP CONSTRAINT IF EXISTS user_subject_mapping_subject_id_fkey,
+#   ADD CONSTRAINT user_subject_mapping_subject_id_fkey 
+#     FOREIGN KEY (subject_id) REFERENCES subjects(subject_id);
+# """)
 
 cur.close()
 conn.close()

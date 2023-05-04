@@ -7,8 +7,6 @@ class DBManager:
     def __init__(self):
         self.interface = DBInterface("smc","smc_access","smc")
     
-
-    
     def addQuestion(self,id,title,question,category):
         self.interface.execute("INSERT INTO user_questions (user_id, question,category,title,rating) VALUES (%s, %s,%s,%s,0)", (id,question,category,title))
         
@@ -24,6 +22,11 @@ class DBManager:
     def deleteUser(self,user_ID):
         self.interface.execute("DELETE FROM users WHERE user_id=%s", (user_ID,))
 
+    def getUserById(self, user_id):
+        self.interface.dict_cur.execute("SELECT * FROM users WHERE user_id = %s", (user_id,))
+        user = self.interface.dict_cur.fetchone()
+        return User(user_id=user['user_id'], username=user['username'], email=user['email'], password=user['password'])
+
     def deleteQuestion(self,question_ID):
         self.interface.execute("DELETE FROM user_questions WHERE question_id=%s", (question_ID,))
 
@@ -31,6 +34,40 @@ class DBManager:
         
     #     result = self.interface.cur.fetchone()
     #     return result[0] if result else None
+
+    def addSubject(self, subject, user_id):
+        # get the subject_id based on the subject name
+        self.interface.execute("SELECT subject_id FROM subjects WHERE subject_name = %s", (subject,))
+        subject_id = self.interface.dict_cur.fetchone()
+        print(f"Subject ID: {subject_id}")
+        
+        # insert into the user_subject_mapping table
+        self.interface.execute("INSERT INTO user_subject_mapping (user_id, subject_id) VALUES (%s, %s)", (user_id, subject_id))
+        print(f"{self.interface.cur.rowcount} record(s) affected")
+        self.interface.conn.commit()
+
+
+
+
+
+    def deleteSubject(self, user_ID, subject_id):
+        self.interface.execute("DELETE FROM user_subject_mapping WHERE user_id=%s AND subject_id=%s", (user_ID, subject_id))
+
+    def getTutorSubjects(self,user_id):
+        self.interface.dict_cur.execute(
+            """
+            SELECT subjects.subject_name 
+            FROM subjects 
+            JOIN user_subject_mapping 
+            ON subjects.subject_id = user_subject_mapping.subject_id 
+            WHERE user_subject_mapping.user_id = %s
+            """, 
+            (user_id,)
+        )
+        return [row['subject_name'] for row in self.interface.dict_cur.fetchall()]
+
+
+
     
     def getUser(self,user_ID=None,username=None,email=None):
         if user_ID and user_ID != "None":
@@ -48,6 +85,16 @@ class DBManager:
             return User(row=result)
         return None
         # return self.interface.cur.fetchone()
+
+    def load_user(user_id):
+        user_row = database_manager.execute("SELECT * FROM users WHERE id=?", (user_id,)).fetchone()
+        if user_row:
+            user = User(user_row)
+            user_subjects = [row[0] for row in database_manager.execute("SELECT subject FROM user_subjects WHERE user_id=?", (user_id,))]
+            user.tutor_subjects = user_subjects
+            return user
+        return None
+
 
 database_manager = DBManager()
 
