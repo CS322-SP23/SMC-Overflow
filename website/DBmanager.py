@@ -35,19 +35,9 @@ class DBManager:
     #     result = self.interface.cur.fetchone()
     #     return result[0] if result else None
 
-    def addSubject(self, subject, user_id):
-        # get the subject_id based on the subject name
-        self.interface.execute("SELECT subject_id FROM subjects WHERE subject_name = %s", (subject,))
-        subject_id = self.interface.dict_cur.fetchone()
-        print(f"Subject ID: {subject_id}")
-        
-        # insert into the user_subject_mapping table
-        self.interface.execute("INSERT INTO user_subject_mapping (user_id, subject_id) VALUES (%s, %s)", (user_id, subject_id))
-        print(f"{self.interface.cur.rowcount} record(s) affected")
-        self.interface.conn.commit()
-
-
-
+    def addSubject(self, subject_id, subject_name, user_id, user_subject_mapping_id):
+        self.interface.execute("INSERT INTO subjects (subject_id, subject_name) VALUES (%s, %s)", (subject_id, subject_name))
+        self.interface.execute("INSERT INTO user_subject_mapping (user_subject_mapping_id, user_id, subject_id) VALUES (%s, %s, %s)", (user_subject_mapping_id, user_id, subject_id))
 
 
     def deleteSubject(self, user_ID, subject_id):

@@ -45,7 +45,6 @@
 		</style>
 <head>
 	<title>My Profile Page</title>
-	<link rel="stylesheet" href="../statics/styles.css">
   	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap">
 </head>
 <body>
@@ -60,17 +59,17 @@
 	<div class="main-container">
 		<div class="container">
 			<div class="email">
-				<label for="username">Username:</label>
-				<!-- <p>{{ current_user.username }}</p> -->
+				<label for="username">Email:</label>
+				<p>{{ current_user.email }}</p>
 			</div>			
-			<h1 align="center">Subjects</h1>
+			<h1 align="center">Subjects Here</h1>
 			<ul class="list-group list-group-flush" id="TutorSubject">
 				{% for subject in current_user.tutor_subjects %}
 				<li class="list-group-item">{{ subject }}</li>
 				{% endfor %}
 			</ul>
 			<h2>Add a subject</h2>
-				<form method="POST" action="{{ url_for('auth.profile_page') }}">
+				<form method="POST" action="/add_subject">
 				<input type="text" name="subject" placeholder="Enter subject name" required>
 				<button type="submit">Add</button>
 				</form>
