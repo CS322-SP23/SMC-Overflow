@@ -32,6 +32,9 @@ class DBInterface:
         self.cur.execute(query,params)
         # self.conn.commit()
 
+    def fetchone(self):
+        return self.cur.fetchone()
+
 
 
 

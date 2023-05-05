@@ -81,7 +81,12 @@ def add_subject():
     if request.method == 'POST':
         # Handle form submission for adding a subject
         subject_name = request.form['subject']
-        database_manager.addSubject( user_id, subject_name, user_id, user_id)
+        #database_manager.addSubject( user_id, subject_name, user_id, user_id)
+        newSubject(current_user.user_id, subject_name)
         subjects = database_manager.getTutorSubjects(user_id) # Update list of subjects
     print(database_manager.getTutorSubjects(user_id))  # print the user's subjects
     return render_template('profile_page.html', user=current_user, subjects=subjects)
+
+def newSubject(id, subject_name):
+    database_manager.addSubject(subject_name, id) #id should be subject id 
+    pass

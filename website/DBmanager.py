@@ -35,9 +35,22 @@ class DBManager:
     #     result = self.interface.cur.fetchone()
     #     return result[0] if result else None
 
-    def addSubject(self, subject_id, subject_name, user_id, user_subject_mapping_id):
+    def addSubject(self, subject_name, user_id):
+        self.interface.execute("SELECT MAX(subject_id) FROM subjects", ())
+        result = self.interface.fetchone()[0]
+        if result is None:
+            subject_id = 1
+        else:
+            subject_id = result + 1
         self.interface.execute("INSERT INTO subjects (subject_id, subject_name) VALUES (%s, %s)", (subject_id, subject_name))
+        self.interface.execute("SELECT MAX(user_subject_mapping_id) FROM user_subject_mapping", ())
+        result = self.interface.fetchone()[0]
+        if result is None:
+            user_subject_mapping_id = 1
+        else:
+            user_subject_mapping_id = result + 1
         self.interface.execute("INSERT INTO user_subject_mapping (user_subject_mapping_id, user_id, subject_id) VALUES (%s, %s, %s)", (user_subject_mapping_id, user_id, subject_id))
+
 
 
     def deleteSubject(self, user_ID, subject_id):
