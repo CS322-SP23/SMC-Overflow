@@ -36,21 +36,24 @@ class DBManager:
     #     return result[0] if result else None
 
     def addSubject(self, subject_name, user_id):
-        self.interface.execute("SELECT MAX(subject_id) FROM subjects", ())
-        result = self.interface.fetchone()[0]
-        if result is None:
-            subject_id = 1
+        # Check if the subject already exists in the database
+        self.interface.execute("SELECT subject_id FROM subjects WHERE subject_name = %s", (subject_name,))
+        result = self.interface.fetchone()
+        if result is not None:
+            subject_id = result[0]
         else:
-            subject_id = result + 1
-        self.interface.execute("INSERT INTO subjects (subject_id, subject_name) VALUES (%s, %s)", (subject_id, subject_name))
-        self.interface.execute("SELECT MAX(user_subject_mapping_id) FROM user_subject_mapping", ())
-        result = self.interface.fetchone()[0]
-        if result is None:
-            user_subject_mapping_id = 1
-        else:
-            user_subject_mapping_id = result + 1
-        self.interface.execute("INSERT INTO user_subject_mapping (user_subject_mapping_id, user_id, subject_id) VALUES (%s, %s, %s)", (user_subject_mapping_id, user_id, subject_id))
-
+            # Add the subject to the subjects table
+            self.interface.execute("INSERT INTO subjects (subject_name) VALUES (%s) RETURNING subject_id", (subject_name,))
+            subject_id = self.interface.fetchone()[0]
+        
+        # Check if the user has already added the same subject
+        self.interface.execute("SELECT user_subject_mapping_id FROM user_subject_mapping WHERE user_id = %s AND subject_id = %s", (user_id, subject_id))
+        result = self.interface.fetchone()
+        if result is not None:
+            return  # The user has already added the same subject, so do nothing
+        
+        # Add the user-subject mapping to the user_subject_mapping table
+        self.interface.execute("INSERT INTO user_subject_mapping (user_id, subject_id) VALUES (%s, %s)", (user_id, subject_id))
 
 
     def deleteSubject(self, user_ID, subject_id):

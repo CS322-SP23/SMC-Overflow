@@ -3,83 +3,80 @@
 	<style>
 		/* Profile Container */
 		.profile-container {
-		margin: 0;
-		padding: 20px;
-		background-color: #532884;
-		box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.9);
-		text-align: center;
-		font-size: 2em;
-		color: white;
+			margin: 0;
+			padding: 20px;
+			background-color: #532884;
+			box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.9);
+			text-align: center;
+			font-size: 2em;
+			color: white;
 		}
 
 		/* Form Container */
 		.container {
-		max-width: 800px;
-		margin: auto;
-		padding: 50px;
-		background-color: white;
-		box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-		border-radius: 8px;
+			max-width: 800px;
+			margin: auto;
+			padding: 50px;
+			background-color: white;
+			box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+			border-radius: 8px;
 		}
+		
 		/* Email Input */
 		.email {
-		margin-bottom: 20px;
+			margin-bottom: 20px;
 		}
 		
 		.email label {
-		display: block;
-		font-size: 24px;
-		color: #F5A00F;
-		margin-bottom: 10px;
+			display: block;
+			font-size: 24px;
+			color: #F5A00F;
+			margin-bottom: 10px;
 		}
 		
 		.email input[type="email"] {
-		width: 100%;
-		padding: 10px;
-		font-size: 18px;
-		border: none;
-		border-radius: 5px;
-		background-color: #F5A00F;
-		color: #ffffff;
+			width: 100%;
+			padding: 10px;
+			font-size: 18px;
+			border: none;
+			border-radius: 5px;
+			background-color: #F5A00F;
+			color: #ffffff;
 		}
-		</style>
-<head>
-	<title>My Profile Page</title>
-  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap">
-</head>
-<body>
-	<div class="button-container">
-		<a href="/" class="back-button">
-		  <span class="back-button-text">Back</span>
-		</a>
-	  </div>
-	<div class="profile-container">
-		<h1>Profile</h1>
-	</div>
-	<div class="main-container">
-		<div class="container">
-			<div class="email">
-				<label for="username">Email:</label>
-				<p>{{ current_user.email }}</p>
-			</div>			
-			<h1 align="center">Subjects Here</h1>
-			<ul class="list-group list-group-flush" id="TutorSubject">
-				{% for subject in current_user.tutor_subjects %}
-				<li class="list-group-item">{{ subject }}</li>
-				{% endfor %}
-			</ul>
-			<h2>Add a subject</h2>
-				<form method="POST" action="/add_subject">
-				<input type="text" name="subject" placeholder="Enter subject name" required>
-				<button type="submit">Add</button>
-				</form>
-			<h2>Subjects</h2>
-				<ul>
-				{% for subject in subjects %}
-					<li>{{ subject }}</li>
-				{% endfor %}
-				</ul>
+	</style>
+	<head>
+		<title>My Profile Page</title>
+  		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap">
+	</head>
+	<body>
+		<div class="button-container">
+			<a href="/" class="back-button">
+				<span class="back-button-text">Back</span>
+			</a>
 		</div>
-	</div>
-</body>
+		<div class="profile-container">
+			<h1>Profile</h1>
+		</div>
+		<div class="main-container">
+			<div class="container">
+				<div class="email">
+					<label for="username">Email:</label>
+					<p>{{ current_user.email }}</p>
+				</div>
+				<h2>Add a subject</h2>
+				<form method="POST" action="/add_subject">
+					<input type="text" name="subject" placeholder="Enter subject name" required>
+					<button type="submit">Add</button>
+				</form>
+				<h2>Subjects:</h2>
+				{% if subjects %}
+				<ul>
+					{% for subject in subjects %}
+					<li>{{ subject }}</li>
+					{% endfor %}
+				</ul>
+				{% endif %}
+			</div>
+		</div>
+	</body>
 </html>

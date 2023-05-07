@@ -29,7 +29,7 @@ def hello():
 @app.route('/profile_page')
 @login_required
 def profile_page(): 
-   subjects = database_manager.getSubjects(current_user.user_id)
+   subjects = database_manager.getTutorSubjects(current_user.user_id)
    return render_template("profile_page.html", subjects=subjects)
 
 
