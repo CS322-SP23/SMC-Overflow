@@ -71,7 +71,11 @@ class DBManager:
             (user_id,)
         )
         return [row['subject_name'] for row in self.interface.dict_cur.fetchall()]
-
+    
+    def getSubjectID(self, s_name):
+        self.interface.execute("SELECT subject_id FROM subjects WHERE subject_name = %s", (s_name,))
+        subject_id = self.interface.fetchone()
+        return subject_id[0] if subject_id else None
 
 
     
