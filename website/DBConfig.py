@@ -46,6 +46,7 @@ CREATE TABLE users (
 """)
 
 cur.execute("""
+profile_page_backend
 CREATE TABLE subjects (
   subject_id SERIAL PRIMARY KEY,
   subject_name TEXT NOT NULL
@@ -69,6 +70,15 @@ CREATE TABLE user_subject_mapping (
 #   ADD CONSTRAINT user_subject_mapping_subject_id_fkey 
 #     FOREIGN KEY (subject_id) REFERENCES subjects(subject_id);
 # """)
+
+cur.execute("""
+CREATE TABLE user_votes (
+  user_id INTEGER,
+  question_id INTEGER,
+  vote INTEGER,
+  PRIMARY KEY(question_id, user_id)
+);
+""")
 
 cur.close()
 conn.close()

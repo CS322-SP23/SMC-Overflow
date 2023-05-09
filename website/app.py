@@ -73,6 +73,7 @@ def newPost(id,title, text, category):
     database_manager.addQuestion(id,title,text,category)
     pass 
 
+
 @app.route('/add_subject', methods=['GET', 'POST'])
 def add_subject():
     # print(User.get_id(current_user))
@@ -91,3 +92,14 @@ def add_subject():
 def newSubject(id, subject_name):
     database_manager.addSubject(subject_name, id) #id should be subject id 
     pass
+
+@app.route('/increase-rating/<postID>')
+def increase_rating(postID):
+    rating=database_manager.submitVote(postID, current_user.user_id, 1)
+    return jsonify({'rating': rating})
+
+@app.route('/decrease-rating/<postID>')
+def decrease(postID):
+    rating=database_manager.submitVote(postID, current_user.user_id, 0)
+    return jsonify({'rating': rating})
+
