@@ -66,10 +66,10 @@ def newPost(id,title, text, category):
 
 @app.route('/increase-rating/<postID>')
 def increase_rating(postID):
-    database_manager.submitVote(postID, current_user.user_id, 1)
-    return
+    rating=database_manager.submitVote(postID, current_user.user_id, 1)
+    return jsonify({'rating': rating})
 
 @app.route('/decrease-rating/<postID>')
 def decrease(postID):
-    database_manager.submitVote(postID, current_user.user_id, 0)
-    return
+    rating=database_manager.submitVote(postID, current_user.user_id, 0)
+    return jsonify({'rating': rating})

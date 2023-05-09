@@ -49,7 +49,7 @@ cur.execute("""
 CREATE TABLE user_votes (
   user_id INTEGER,
   question_id INTEGER,
-  vote BIT,
+  vote INTEGER,
   PRIMARY KEY(question_id, user_id)
 );
 """)
