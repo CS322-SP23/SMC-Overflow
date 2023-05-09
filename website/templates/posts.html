@@ -2,7 +2,7 @@
 <html>
   <head>
     <link rel="shortcut icon" href="#">
-    <title>Displaying posts from JSON file</title>
+    <title>SMC Overflow</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -74,6 +74,9 @@
               <h3>${post.username}</h3>
               <h3>Category: ${post.category}</h3>
               <p>${post.question}</p>
+              <p>Rating: <span class="rating" data-post-id="${post.question_id}">${post.rating}</span></p>
+              <button onclick="increaseRating(${post.question_id})">Increase Rating</button>
+              <button onclick="decreaseRating(${post.question_id})">Decrease Rating</button>
             `;
 
             // Add the post to the page
@@ -81,6 +84,32 @@
           });
         })
         .catch(error => console.error(error));
+
+
+        function increaseRating(postId) {
+          fetch(`/increase-rating/${postId}`)
+            .then(response => response.json())
+            .then(data => {
+              const ratingElements = document.querySelectorAll(`.rating[data-post-id="${postId}"]`);
+              ratingElements.forEach(element => {
+                element.innerText = data.rating;
+              });
+            })
+            .catch(error => console.error(error));
+        }
+
+        function decreaseRating(postId) {
+          fetch(`/decrease-rating/${postId}`)
+            .then(response => response.json())
+            .then(data => {
+              const ratingElements = document.querySelectorAll(`.rating[data-post-id="${postId}"]`);
+              ratingElements.forEach(element => {
+                element.innerText = data.rating;
+              });
+            })
+            .catch(error => console.error(error));
+        }
+
     </script>
   </body>
 </html>
