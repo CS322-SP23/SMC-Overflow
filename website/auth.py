@@ -88,7 +88,9 @@ def posts():
 @auth.route('/profile_page', methods=['GET', 'POST'])
 @login_required
 def profile_page():
-       return render_template('profile_page.html')
+       subjects = database_manager.getTutorSubjects(current_user.user_id)
+       print(subjects)
+       return render_template('profile_page.html', subjects = subjects)
 
 # class Authenticator():
 

@@ -30,6 +30,7 @@ def hello():
 @login_required
 def profile_page(): 
    subjects = database_manager.getTutorSubjects(current_user.user_id)
+#    print(subjects)
    return render_template("profile_page.html", subjects=subjects)
 
 
