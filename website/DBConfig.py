@@ -46,7 +46,6 @@ CREATE TABLE users (
 """)
 
 cur.execute("""
-profile_page_backend
 CREATE TABLE subjects (
   subject_id SERIAL PRIMARY KEY,
   subject_name TEXT NOT NULL
