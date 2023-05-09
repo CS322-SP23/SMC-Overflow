@@ -76,10 +76,6 @@ def sign_up():
 
     return render_template("sign_up.html", user=current_user)
     
-@auth.route('/profile_page')
-@login_required
-def profile_page():
-   return render_template("profile_page.html")
 
 @auth.route('/form', methods=['GET', 'POST'])
 def form():
@@ -89,8 +85,12 @@ def form():
 def posts():
     return render_template("posts.html")
 
-
-
+@auth.route('/profile_page', methods=['GET', 'POST'])
+@login_required
+def profile_page():
+       subjects = database_manager.getTutorSubjects(current_user.user_id)
+       print(subjects)
+       return render_template('profile_page.html', subjects = subjects)
 
 # class Authenticator():
 

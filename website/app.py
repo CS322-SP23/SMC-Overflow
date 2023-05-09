@@ -2,6 +2,7 @@ from flask import Flask, jsonify, render_template, request, send_file,redirect,u
 import json
 from .DBmanager import database_manager
 from flask_login import current_user, login_required
+import uuid
 
 from .auth import auth
 from . import create_app
@@ -26,8 +27,12 @@ def hello():
         return redirect("/login")
 
 @app.route('/profile_page')
+@login_required
 def profile_page(): 
-   return render_template("profile_page.html")
+   subjects = database_manager.getTutorSubjects(current_user.user_id)
+#    print(subjects)
+   return render_template("profile_page.html", subjects=subjects)
+
 
 @app.route('/form', methods=['GET', 'POST'])
 def form():
@@ -49,6 +54,10 @@ def get_data():
 def get_js():
     return send_file('javascript/questionSubmitButtonPress.js', mimetype='application/javascript')
 
+# @app.route('/_subject')
+# def get_js():
+#     return send_file('javascript/subjectDisplayer.js', mimetype= 'text/javascript')
+
 @app.route('/new-post', methods=['POST'])
 def handle_new_post():
     data = request.form.to_dict()
@@ -64,6 +73,26 @@ def newPost(id,title, text, category):
     database_manager.addQuestion(id,title,text,category)
     pass 
 
+
+@app.route('/add_subject', methods=['GET', 'POST'])
+def add_subject():
+    # print(User.get_id(current_user))
+    user_id = current_user.user_id
+    print(database_manager.getTutorSubjects(user_id))
+    subjects = database_manager.getTutorSubjects(user_id)
+    if request.method == 'POST':
+        # Handle form submission for adding a subject
+        subject_name = request.form['subject']
+        #database_manager.addSubject( user_id, subject_name, user_id, user_id)
+        newSubject(current_user.user_id, subject_name)
+        subjects = database_manager.getTutorSubjects(user_id) # Update list of subjects
+    print(database_manager.getTutorSubjects(user_id))  # print the user's subjects
+    return render_template('profile_page.html', user=current_user, subjects=subjects)
+
+def newSubject(id, subject_name):
+    database_manager.addSubject(subject_name, id) #id should be subject id 
+    pass
+
 @app.route('/increase-rating/<postID>')
 def increase_rating(postID):
     rating=database_manager.submitVote(postID, current_user.user_id, 1)
@@ -73,3 +102,4 @@ def increase_rating(postID):
 def decrease(postID):
     rating=database_manager.submitVote(postID, current_user.user_id, 0)
     return jsonify({'rating': rating})
+
