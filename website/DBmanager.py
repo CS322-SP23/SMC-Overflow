@@ -16,6 +16,9 @@ class DBManager:
         self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id ORDER BY user_questions.created_at DESC LIMIT %s",(num,))
         return(self.interface.dict_cur.fetchall())
 
+    def getQuestionsOrdered(self,num,category):
+        self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id ORDER BY user_questions.created_at DESC LIMIT %s",(num,))
+        return(self.interface.dict_cur.fetchall())
     def addUser(self,username, role,hash):
         self.interface.execute("INSERT INTO users (username,role,hash) VALUES (%s,%s,%s)", (username,role,hash))
 
