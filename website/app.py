@@ -103,3 +103,13 @@ def decrease(postID):
     rating=database_manager.submitVote(postID, current_user.user_id, 0)
     return jsonify({'rating': rating})
 
+@app.route('/viewpost/<postID>')
+def show_post(postID):
+    post=database_manager.getQuestion(postID)
+    return render_template("singlepost.html", post=post)
+
+@app.route('/submit_reply/<postID>')
+def reply(postID):
+    text = request.form['reply_text']
+    database_manager.submitReply(postID, current_user.user_id, text)
+    pass
