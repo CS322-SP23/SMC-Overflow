@@ -10,9 +10,12 @@ class DBManager:
     def addQuestion(self,id,title,question,category):
         self.interface.execute("INSERT INTO user_questions (user_id, question,category,title,rating) VALUES (%s, %s,%s,%s,0)", (id,question,category,title))
         
+    def getQuestion(self, qID):
+        self.interface.dict_cur.execute('SELECT * from user_questions where question_id=%s', (qID))
+        response=self.interface.dict_cur.fetchone()
+        return(response)
     
     def getQuestions(self,num, category):
-
         self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id ORDER BY user_questions.created_at DESC LIMIT %s",(num,))
         return(self.interface.dict_cur.fetchall())
 
@@ -156,8 +159,12 @@ class DBManager:
         rating=self.interface.cur.fetchone()
         return rating
 
-        
-
+    def submitReply(self, pID, uID, text):
+        self.interface.execute("INSERT INTO replies (question_id, user_id, rating, text) values (%s, %s, 0, %s)", (pID, uID, text))
+    
+    def getReplies(self,postID):
+        self.interface.dict_cur.execute("select replies.*,users.username from replies join users on replies.user_id = users.user_id WHERE replies.question_ID=%s ORDER BY replies.created_at DESC",(postID,))
+        return(self.interface.dict_cur.fetchall())
 database_manager = DBManager()
 
 

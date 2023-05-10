@@ -52,23 +52,131 @@
         margin: 0;
         padding: 20px;
       }
+      /* Back button */
+      .back-button {
+        max-width: 60px;
+        background-color: #F5A00F;
+        color: #532884;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      /* Reply form */
+      .reply-form {
+        max-width: 500px;
+        margin-top: 20px;
+        display: block;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+      }
+
+      .reply-form label {
+        font-size: 18px;
+        margin-bottom: 5px;
+        display: block;
+      }
+
+      .reply-form textarea {
+        width: 100%;
+        height: 100px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+      }
+
+      .reply-form input[type="submit"] {
+        background-color: #F5A00F;
+        color: #532884;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      /* Displayed replies */
+      .displayed-replies {
+        max-width: 500px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .displayed-replies .reply {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .displayed-replies .reply h3 {
+        font-size: 16px;
+        margin: 0;
+        margin-bottom: 5px;
+      }
+
+      .displayed-replies .reply p {
+        font-size: 14px;
+        margin: 0;
+        margin-top: 5px;
+      }
+
     </style>
   </head>
   <body>
+    <div id="backBtn", class="back-button">
+      <a href="/posts" class="btn">Back</a>
+    </div>
+  
     <div id="posts", class="post">
-              <h2>{{post.title}}</h2>
-              <h3>{{post.username}}</h3>
-              <h3>Category: {{post.category}}</h3>
-              <p>{{post.question}}</p>
-              <p>Rating: <span class="rating" data-post-id="${post.question_id}">{{post.rating}}</span></p>
-            </div>
+      <h2>{{post.title}}</h2>
+      <h3>{{post.username}}</h3>
+      <h3>Category: {{post.category}}</h3>
+      <p>{{post.question}}</p>
+      <p>Rating: <span class="rating" data-post-id="${post.question_id}">{{post.rating}}</span></p>
+    </div>
 
-            <div class="reply-form">
-              <form action="/submit_reply/{{post.question_id}}" method="POST">
-                <label for="reply-text">Your Reply:</label><br>
-                <textarea id="reply-text" name="reply_text"></textarea><br>
-                <input type="submit" value="Submit Reply">
-              </form>
-            </div>
-      </body>
-      </html>
+    <div class="reply-form", class="reply-form">
+      <form action="/submit_reply/{{post.question_id}}" method="POST">
+        <label for="reply-text">Your Reply:</label><br>
+        <textarea id="reply-text" name="reply_text"></textarea><br>
+        <input type="submit" value="Submit Reply">
+      </form>
+    </div>
+
+    <div id="replyDiv", class="displayed-replies">
+
+    </div>
+    <script>
+      const postID = window.location.pathname.split('/').pop();
+      fetch(`/replies/${postID}`)
+        .then(response => response.json())
+        .then(replies => {
+          // Get the div where the replies will be displayed
+          const repliesDiv = document.createElement('div');
+          repliesDiv.classList.add('repies');
+
+          // Loop through the replies and create HTML elements for each one
+          replies.forEach(reply => {
+            const replyDiv = document.createElement('div');
+            replyDiv.classList.add('reply');
+            replyDiv.innerHTML = `
+              <h3>${reply.username}</h3>
+              <p>${reply.text}</p>
+            `;
+            repliesDiv.appendChild(replyDiv);
+          });
+
+          // Add the replies div to the page
+          const rDiv = document.getElementById('replyDiv');
+          rDiv.appendChild(repliesDiv);
+        });
+    </script>
+ </body>
+</html>

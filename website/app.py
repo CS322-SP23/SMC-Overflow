@@ -108,8 +108,13 @@ def show_post(postID):
     post=database_manager.getQuestion(postID)
     return render_template("singlepost.html", post=post)
 
-@app.route('/submit_reply/<postID>')
+@app.route('/submit_reply/<postID>', methods=['POST'])
 def reply(postID):
     text = request.form['reply_text']
     database_manager.submitReply(postID, current_user.user_id, text)
-    pass
+    return redirect('/viewpost/'+postID)
+
+@app.route('/replies/<postID>')
+def get_replies(postID):
+    replies=database_manager.getReplies(postID)
+    return jsonify(replies)
