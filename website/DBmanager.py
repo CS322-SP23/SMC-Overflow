@@ -172,7 +172,13 @@ class DBManager:
         return rating
 
     def submitReply(self, pID, uID, text):
-        self.interface.execute("INSERT INTO replies (question_id, user_id, rating, text) values (%s, %s, 0, %s)", (pID, uID, escape(text)[0:1024]))
+        self.interface.cur.execute("Select * from user_questions")
+        result=self.interface.cur.fetchall()
+        if pID<=len(result):
+            self.interface.execute("INSERT INTO replies (question_id, user_id, rating, text) values (%s, %s, 0, %s)", (pID, uID, escape(text)[0:1024]))
+            return True
+        else:
+            return False
     
     def getReplies(self,postID):
         self.interface.dict_cur.execute("select replies.*,users.username from replies join users on replies.user_id = users.user_id WHERE replies.question_ID=%s ORDER BY replies.created_at DESC",(postID,))
