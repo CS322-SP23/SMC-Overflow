@@ -69,13 +69,28 @@
 					<button type="submit">Add</button>
 				</form>
 				<h2>Subjects:</h2>
-				{% if subjects %}
+				<!-- {% if subjects %}
 				<ul>
 					{% for subject in subjects %}
 					<li>{{ subject }}</li>
 					{% endfor %}
 				</ul>
 				{% endif %}
+				<ul> -->
+					{% for subject in subjects %}
+					<li>
+						{{ subject }}
+						<form method="POST" action="/delete_subject">
+						<input type="hidden" name="subject_name" value="{{ subject }}">
+						{% if subject.subject_id %}
+							{% set subject_id = subject.subject_id %}
+							{{ subject_id }} # print subject_id value here
+						{% endif %}
+						<button type="submit">Delete</button>
+						</form>
+					</li>
+					{% endfor %}
+				  </ul>				  
 			</div>
 		</div>
 	</body>

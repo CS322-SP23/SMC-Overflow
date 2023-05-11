@@ -93,6 +93,18 @@ def newSubject(id, subject_name):
     database_manager.addSubject(subject_name, id) #id should be subject id 
     pass
 
+@app.route('/delete_subject', methods=['POST'])
+def delete_subject():
+    user_id = current_user.user_id
+    subjects = database_manager.getTutorSubjects(user_id)
+    if request.method == 'POST':
+        subject_name = request.form['subject_name']
+        print("Subject name:", subject_name)
+        subject_id = database_manager.getSubjectID(subject_name)
+        database_manager.deleteSubject(user_id, subject_id)
+        subjects = database_manager.getTutorSubjects(user_id) # Update list of subjects
+    return redirect(url_for('profile_page', subjects=subjects))
+
 @app.route('/increase-rating/<postID>')
 def increase_rating(postID):
     rating=database_manager.submitVote(postID, current_user.user_id, 1)

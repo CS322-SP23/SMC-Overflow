@@ -52,6 +52,7 @@ CREATE TABLE subjects (
 );
 """)
 
+
 cur.execute("""
 CREATE TABLE user_subject_mapping (
   user_subject_mapping_id SERIAL PRIMARY KEY,
