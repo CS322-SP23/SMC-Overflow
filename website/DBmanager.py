@@ -1,13 +1,17 @@
 from .DBinterface import DBInterface
 from .models import User
-
-
+from flask import escape
 class DBManager:
 
     def __init__(self):
         self.interface = DBInterface("smc","smc_access","smc")
     
     def addQuestion(self,id,title,question,category):
+        title = escape(title)[0:128]
+        question = escape(question)[0:1024]
+        category = escape(category)[0:128]
+
+
         self.interface.execute("INSERT INTO user_questions (user_id, question,category,title,rating) VALUES (%s, %s,%s,%s,0)", (id,question,category,title))
         
     def getQuestion(self, qID):
@@ -23,7 +27,8 @@ class DBManager:
         self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id ORDER BY user_questions.created_at DESC LIMIT %s",(num,))
         return(self.interface.dict_cur.fetchall())
     def addUser(self,username, role,hash):
-        self.interface.execute("INSERT INTO users (username,role,hash) VALUES (%s,%s,%s)", (username,role,hash))
+
+        self.interface.execute("INSERT INTO users (username,role,hash) VALUES (%s,%s,%s)", (escape(username),escape(role),hash))
 
     def deleteUser(self,user_ID):
         self.interface.execute("DELETE FROM users WHERE user_id=%s", (user_ID,))
@@ -42,6 +47,8 @@ class DBManager:
     #     return result[0] if result else None
 
     def addSubject(self, subject_name, user_id):
+        subject_name=escape(subject_name)
+
         # Check if the subject already exists in the database
         self.interface.execute("SELECT subject_id FROM subjects WHERE subject_name = %s", (subject_name,))
         result = self.interface.fetchone()
@@ -86,10 +93,11 @@ class DBManager:
 
     
     def getUser(self,user_ID=None,username=None,email=None):
+        
         if user_ID and user_ID != "None":
             self.interface.cur.execute("SELECT * FROM users WHERE user_id=%s",(user_ID,))
         elif username:
-            self.interface.cur.execute("SELECT * FROM users WHERE username=%s", (username,))
+            self.interface.cur.execute("SELECT * FROM users WHERE username=%s", (escape(username),))
         elif email:
             self.interface.cur.execute("SELECT * FROM users WHERE username=%s", (email,))
         else:
@@ -164,7 +172,7 @@ class DBManager:
         return rating
 
     def submitReply(self, pID, uID, text):
-        self.interface.execute("INSERT INTO replies (question_id, user_id, rating, text) values (%s, %s, 0, %s)", (pID, uID, text))
+        self.interface.execute("INSERT INTO replies (question_id, user_id, rating, text) values (%s, %s, 0, %s)", (pID, uID, escape(text)[0:1024]))
     
     def getReplies(self,postID):
         self.interface.dict_cur.execute("select replies.*,users.username from replies join users on replies.user_id = users.user_id WHERE replies.question_ID=%s ORDER BY replies.created_at DESC",(postID,))
