@@ -115,7 +115,7 @@ def decrease(postID):
     rating=database_manager.submitVote(postID, current_user.user_id, 0)
     return jsonify({'rating': rating})
 
-@app.route('/viewpost/<postID>')
+@app.route('/viewpost/<int:postID>')
 def show_post(postID):
     post=database_manager.getQuestion(postID)
     return render_template("singlepost.html", post=post)
