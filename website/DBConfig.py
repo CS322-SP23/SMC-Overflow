@@ -80,5 +80,16 @@ CREATE TABLE user_votes (
 );
 """)
 
+cur.execute("""
+CREATE TABLE replies (
+  reply_id SERIAL PRIMARY KEY,
+  question_id INTEGER,
+  user_id INTEGER,
+  rating INTEGER NOT NULL,
+  text TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+""")  
+
 cur.close()
 conn.close()
