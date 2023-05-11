@@ -46,12 +46,12 @@ CREATE TABLE users (
 """)
 
 cur.execute("""
-profile_page_backend
 CREATE TABLE subjects (
   subject_id SERIAL PRIMARY KEY,
   subject_name TEXT NOT NULL
 );
 """)
+
 
 cur.execute("""
 CREATE TABLE user_subject_mapping (
@@ -79,6 +79,17 @@ CREATE TABLE user_votes (
   PRIMARY KEY(question_id, user_id)
 );
 """)
+
+cur.execute("""
+CREATE TABLE replies (
+  reply_id SERIAL PRIMARY KEY,
+  question_id INTEGER,
+  user_id INTEGER,
+  rating INTEGER NOT NULL,
+  text TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+""")  
 
 cur.close()
 conn.close()

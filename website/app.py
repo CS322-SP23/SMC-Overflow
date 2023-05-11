@@ -93,6 +93,18 @@ def newSubject(id, subject_name):
     database_manager.addSubject(subject_name, id) #id should be subject id 
     pass
 
+@app.route('/delete_subject', methods=['POST'])
+def delete_subject():
+    user_id = current_user.user_id
+    subjects = database_manager.getTutorSubjects(user_id)
+    if request.method == 'POST':
+        subject_name = request.form['subject_name']
+        print("Subject name:", subject_name)
+        subject_id = database_manager.getSubjectID(subject_name)
+        database_manager.deleteSubject(user_id, subject_id)
+        subjects = database_manager.getTutorSubjects(user_id) # Update list of subjects
+    return redirect(url_for('profile_page', subjects=subjects))
+
 @app.route('/increase-rating/<postID>')
 def increase_rating(postID):
     rating=database_manager.submitVote(postID, current_user.user_id, 1)
@@ -103,3 +115,18 @@ def decrease(postID):
     rating=database_manager.submitVote(postID, current_user.user_id, 0)
     return jsonify({'rating': rating})
 
+@app.route('/viewpost/<postID>')
+def show_post(postID):
+    post=database_manager.getQuestion(postID)
+    return render_template("singlepost.html", post=post)
+
+@app.route('/submit_reply/<postID>', methods=['POST'])
+def reply(postID):
+    text = request.form['reply_text']
+    database_manager.submitReply(postID, current_user.user_id, text)
+    return redirect('/viewpost/'+postID)
+
+@app.route('/replies/<postID>')
+def get_replies(postID):
+    replies=database_manager.getReplies(postID)
+    return jsonify(replies)

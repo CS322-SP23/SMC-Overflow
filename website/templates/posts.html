@@ -55,6 +55,7 @@
     </style>
   </head>
   <body>
+    <a href="/" class="btn">Back</a>
     <div id="posts"></div>
 
     <script>
@@ -77,6 +78,7 @@
               <p>Rating: <span class="rating" data-post-id="${post.question_id}">${post.rating}</span></p>
               <button onclick="increaseRating(${post.question_id})">Increase Rating</button>
               <button onclick="decreaseRating(${post.question_id})">Decrease Rating</button>
+              <a href="/viewpost/${post.question_id}" class="btn">View Post</a>
             `;
 
             // Add the post to the page
