@@ -123,7 +123,7 @@ def show_post(postID):
 @app.route('/submit_reply/<postID>', methods=['POST'])
 def reply(postID):
     text = request.form['reply_text']
-    database_manager.submitReply(postID, current_user.user_id, text)
+    database_manager.submitReply(postID, current_user.user_id, escape(text))
     return redirect('/viewpost/'+postID)
 
 @app.route('/replies/<postID>')
