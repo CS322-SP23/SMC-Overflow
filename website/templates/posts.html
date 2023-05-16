@@ -4,6 +4,38 @@
     <link rel="shortcut icon" href="#">
     <title>SMC Overflow</title>
     <style>
+      .header {
+      text-align: center;
+      background-color: #532884;
+      padding: 20px;
+      }
+
+      .navbar {
+      display: flex;
+      justify-content: center;
+      background-color: #532884;
+      height: px; /* Adjust the height as per your requirement */
+      }
+
+      .navbar nav {
+      display: flex;
+      gap: 20px;
+      height: 100%; /* Set the height to 100% to fill the navbar */
+      }
+
+      .navbar a {
+      font-size: 24px;
+      text-decoration: none;
+      color: #F5A00F;
+      padding: 10px 10px; /* Increase the padding to create more height */
+      border-radius: 5px;
+      background-color: #532884;
+      }
+
+
+      .navbar a:hover {
+      background-color: #8c57a7; /* lighter shade of the background color */
+      }
       body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -53,9 +85,15 @@
         padding: 20px;
       }
     </style>
+      <div class="navbar">
+        <nav>
+          <a href= "/">Home</a>
+          <a href= "/profile_page">Profile</a>
+          <a href= "/logout">Logout</a>
+        </nav>
+        </div>
   </head>
   <body>
-    <a href="/" class="btn">Back</a>
     <div id="posts"></div>
 
     <script>
