@@ -56,9 +56,25 @@
   </head>
   <body>
     <a href="/" class="btn">Back</a>
+    <select id="sort-dropdown">
+      <option value="">Sort By</option>
+      <optgroup label="Popularity">
+        <option value="0">Popularity: Low to High</option>
+        <option value="1">Popularity: High to Low</option>
+      </optgroup>
+      <optgroup label="Recency">
+        <option value="2">Recency: Old to New</option>
+        <option value="3" selected>Recency: New to Old</option>
+      </optgroup>
+      <optgroup label="Answers">
+        <option value="4">Unanswered</option>
+        <option value="5">Most Answers</option>
+      </optgroup>
+    </select>
+    
     <div id="posts"></div>
-
     <script>
+
       // Fetch the JSON data
       fetch('/data')
         .then(response => response.json())
@@ -86,6 +102,35 @@
           });
         })
         .catch(error => console.error(error));
+
+        document.getElementById('sort-dropdown').addEventListener('change', function() {
+          var selectedOption = this.value;
+          
+          fetch(`/data?sort=${selectedOption}`)
+            .then(response => response.json())
+            .then(posts => {
+              const postsDiv = document.getElementById('posts');
+              postsDiv.innerHTML = ''; // Clear the existing posts
+
+              // Loop through the retrieved posts and create HTML elements for each post
+              posts.forEach(post => {
+                const postDiv = document.createElement('div');
+                postDiv.classList.add('post');
+                postDiv.innerHTML = `
+                  <h2>${post.title}</h2>
+                  <h3>${post.username}</h3>
+                  <h3>Category: ${post.category}</h3>
+                  <p>${post.question}</p>
+                  <p>Rating: <span class="rating" data-post-id="${post.question_id}">${post.rating}</span></p>
+                  <button onclick="increaseRating(${post.question_id})">Increase Rating</button>
+                  <button onclick="decreaseRating(${post.question_id})">Decrease Rating</button>
+                  <a href="/viewpost/${post.question_id}" class="btn">View Post</a>
+                `;
+                postsDiv.appendChild(postDiv); // Add the post to the page
+              });
+            })
+            .catch(error => console.error(error));
+        });
 
 
         function increaseRating(postId) {
