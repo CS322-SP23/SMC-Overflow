@@ -87,7 +87,8 @@ CREATE TABLE replies (
   user_id INTEGER,
   rating INTEGER NOT NULL,
   text TEXT NOT NULL,
-  created_at TIMESTAMP DEFAULT NOW()
+  created_at TIMESTAMP DEFAULT NOW(),
+  has_subject_match BOOLEAN
 );
 """)  
 

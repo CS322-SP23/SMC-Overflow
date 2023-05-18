@@ -127,6 +127,10 @@
         margin-top: 5px;
       }
 
+      .checkmark {
+        color: green;
+      }
+      
     </style>
   </head>
   <body>
@@ -166,8 +170,12 @@
           replies.forEach(reply => {
             const replyDiv = document.createElement('div');
             replyDiv.classList.add('reply');
+
+            // Add a check mark if has_subject_match is true
+            const checkMark = reply.has_subject_match ? '&#10004;' : '';
+
             replyDiv.innerHTML = `
-              <h3>${reply.username}</h3>
+              <h3>${reply.username} ${checkMark}</h3>
               <p>${reply.text}</p>
             `;
             repliesDiv.appendChild(replyDiv);
@@ -177,6 +185,6 @@
           const rDiv = document.getElementById('replyDiv');
           rDiv.appendChild(repliesDiv);
         });
-    </script>
+    </script>        
  </body>
 </html>
