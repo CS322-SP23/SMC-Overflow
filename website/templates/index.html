@@ -5,14 +5,39 @@
   <title>SMC-Overflow</title>
   <style>
     /* Page Header */
-    .header {
+      .header {
       text-align: center;
-      font-family: Helvetica;
-      font-weight: bold;
-      color: #532884;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
-      font-size: 4em;
-    }
+      background-color: #532884;
+      padding: 20px;
+      }
+
+      .navbar {
+      display: flex;
+      justify-content: center;
+      background-color: #532884;
+      height: px; /* Adjust the height as per your requirement */
+      }
+
+      .navbar nav {
+      display: flex;
+      gap: 20px;
+      height: 100%; /* Set the height to 100% to fill the navbar */
+      }
+
+      .navbar a {
+      font-size: 24px;
+      text-decoration: none;
+      color: #F5A00F;
+      padding: 10px 10px; /* Increase the padding to create more height */
+      border-radius: 5px;
+      background-color: #532884;
+      }
+
+
+      .navbar a:hover {
+      background-color: #8c57a7; /* lighter shade of the background color */
+      }
+
 
     /* Buttons */
     .button-container {
@@ -75,7 +100,15 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap">
 </head>
 <body>
-  <h1 class="header">SMC-Overflow</h1>
+  <h1 class="header">
+    <div class="navbar">
+      <nav>
+        <a href= "/">Home</a>
+        <a href= "/profile_page">Profile</a>
+        <a href= "/logout">Logout</a>
+      </nav>
+    </div>
+  </h1>
   <div class="button-container">
     <a href="/form" class="submit-button">
       <span class="button-container">Submit Post</span>
@@ -83,18 +116,14 @@
     <a href="/posts" class="submit-button">
       <span class="button-container">View Posts</span>
     </a>
-    <div class="profile-button">
-      <a href="/profile_page">Profile</a>
-    </div>
+
     <!-- <a href="/login" class="login-button">
       <span class="button-container">Login</span>
     </a>
     <a href="/sign_up" class="sign-up-button">
       <span class="button-container">Sign-up</span>
     </a>-->
-    <a href="/logout" class="logout-button">
-      <span class="button-container">Logout</span>
-    </a> 
+
   </div>
 </body>
 </html>
