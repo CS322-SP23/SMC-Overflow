@@ -15,8 +15,37 @@ class DBManager:
         response=self.interface.dict_cur.fetchone()
         return(response)
     
-    def getQuestions(self,num, category):
-        self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id ORDER BY user_questions.created_at DESC LIMIT %s",(num,))
+    def getQuestions(self,num, category='All', method=3):
+        if category=='All':
+            if method==0:   #Least Popular
+                self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id ORDER BY user_questions.rating LIMIT %s",(num,))
+            elif method==1: #Most Popular
+                self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id ORDER BY user_questions.rating DESC LIMIT %s",(num,))
+            elif method==2: #Oldest
+                self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id ORDER BY user_questions.created_at LIMIT %s",(num,))
+            elif method==3: #Newest
+                self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id ORDER BY user_questions.created_at DESC LIMIT %s",(num,))
+            elif method==4: #Sort by Unanswered
+                self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id WHERE user_questions.question_id NOT IN (SELECT question_id from replies) ORDER BY user_questions.created_at DESC LIMIT %s",(num,))
+            elif method==5: #Sort by Most Answers
+                self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id ORDER BY (SELECT count(*) FROM replies WHERE question_id=user_questions.question_id) DESC LIMIT %s",(num,))
+            else:   #Contingency
+                self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id ORDER BY user_questions.created_at DESC LIMIT %s",(num,))
+        else:
+            if method==0:   #Least Popular
+                self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id WHERE user_questions.category=%s ORDER BY user_questions.rating LIMIT %s",(category, num))
+            elif method==1: #Most Popular
+                self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id WHERE user_questions.category=%s ORDER BY user_questions.rating DESC LIMIT %s",(category, num))
+            elif method==2: #Oldest
+                self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id WHERE user_questions.category=%s ORDER BY user_questions.created_at LIMIT %s",(category, num))
+            elif method==3: #Newest
+                self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id WHERE user_questions.category=%s ORDER BY user_questions.created_at DESC LIMIT %s",(category, num))
+            elif method==4: #Sort by Unanswered
+                self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id WHERE user_questions.category=%s AND user_questions.question_id NOT IN (SELECT question_id from replies) ORDER BY user_questions.created_at DESC LIMIT %s",(subject_id, num))
+            elif method==5: #Sort by Most Answers
+                self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id WHERE user_questions.category=%s ORDER BY (SELECT count(*) FROM replies WHERE question_id=user_questions.question_id) DESC LIMIT %s",(subject_id, num))
+            else:   #Contingency
+                self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id ORDER BY user_questions.created_at DESC LIMIT %s",(num,))
         return(self.interface.dict_cur.fetchall())
 
     def getQuestionsOrdered(self,num,category):

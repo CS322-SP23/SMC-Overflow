@@ -47,7 +47,14 @@ def posts():
 
 @app.route('/data')
 def get_data():
-    data = database_manager.getQuestions(10,"*")
+    sort_option = request.args.get('sort', default=3)
+    so=int(sort_option)
+    cat_option = request.args.get('category', default='All')
+    co=escape(cat_option)
+    if (so>=0)and(so<6):    #These numbers come from the drop down menu in posts.html
+        data = database_manager.getQuestions(10, category=co, method=so)     
+    else:
+        data = database_manager.getQuestions(10, category=co)
     return jsonify(data)
 
 @app.route('/buttonPressScript')
