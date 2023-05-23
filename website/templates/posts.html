@@ -42,6 +42,16 @@
         padding: 0;
       }
 
+      .back-button {
+        max-width: 10%;
+        background-color: #532884;
+        color: #F5A00F;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
       #posts {
         display: block;
         margin-top: 20px;
@@ -84,6 +94,41 @@
         margin: 0;
         padding: 20px;
       }
+
+      .dropdown {
+        max-width: 10%;
+        background-color: #532884;
+        color: #F5A00F;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .dropdown select {
+        color: #F5A00F;
+        background-color: #532884;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      .dropdown select:focus {
+        outline: none;
+      }
+
+      .dropdown option {
+        color: #F5A00F;
+        background-color: #532884;
+        padding: 5px 10px;
+      }
+
+      .dropdown-collapsed option::before {
+        content: attr(data-abbreviation);
+        font-weight: bold;
+        margin-right: 5px;
+      }
     </style>
       <div class="navbar">
         <nav>
@@ -94,8 +139,8 @@
         </div>
   </head>
   <body>
-    <a href="/" class="btn">Back</a>
-    <select id="sort-dropdown">
+    <a href="/" class="back-button">Back</a>
+    <select id="sort-dropdown" class="dropdown">
       <option value="">Sort By</option>
       <optgroup label="Popularity">
         <option value="0">Popularity: Low to High</option>
@@ -110,59 +155,57 @@
         <option value="5">Most Answers</option>
       </optgroup>
     </select>
-    <select id="cat-dropdown">
-      <optgroup label="Categories">
-        <option value="All">All</option>
-        <option value="Africana Studies">Africana Studies</option>
-        <option value="American Studies">American Studies</option>
-        <option value="Anthropology and Sociology">Anthropology and Sociology</option>
-        <option value="Art and Art History">Art and Art History</option>
-        <option value="Arts Administration">Arts Administration</option>
-        <option value="Asian Studies">Asian Studies</option>
-        <option value="Astronomy">Astronomy</option>
-        <option value="Biochemistry">Biochemistry</option>
-        <option value="Biology">Biology</option>
-        <option value="Business and Management">Business and Management</option>
-        <option value="Chemistry">Chemistry</option>
-        <option value="Chinese">Chinese</option>
-        <option value="Classics and Ancient Mediterranean Studies">Classics and Ancient Mediterranean Studies</option>
-        <option value="Computer Science">Computer Science</option>
-        <option value="Dance">Dance</option>
-        <option value="Data Science">Data Science</option>
-        <option value="Earth Science">Earth Science</option>
-        <option value="Economics">Economics</option>
-        <option value="Educational Studies">Educational Studies</option>
-        <option value="Engineering">Engineering</option>
-        <option value="English">English</option>
-        <option value="Environmental Studies">Environmental Studies</option>
-        <option value="Film Studies">Film Studies</option>
-        <option value="French">French</option>
-        <option value="Gender and Women's Studies">Gender and Women's Studies</option>
-        <option value="German">German</option>
-        <option value="Health Studies">Health Studies</option>
-        <option value="History">History</option>
-        <option value="Interdisciplinary Studies">Interdisciplinary Studies</option>
-        <option value="International Relations">International Relations</option>
-        <option value="International Studies">International Studies</option>
-        <option value="Japanese">Japanese</option>
-        <option value="Journalism">Journalism</option>
-        <option value="Latin American Studies">Latin American Studies</option>
-        <option value="Law">Law</option>
-        <option value="Mathematics">Mathematics</option>
-        <option value="Medicine">Medicine</option>
-        <option value="Modern Languages">Modern Languages</option>
-        <option value="Music">Music</option>
-        <option value="Neuroscience">Neuroscience</option>
-        <option value="Nursing">Nursing</option>
-        <option value="Occupational Therapy">Occupational Therapy</option>
-        <option value="Optometry">Optometry</option>
-        <option value="Peace and Justice">Peace and Justice</option>
-        <option value="Philosophy">Philosophy</option>
-        <option value="Physics">Physics</option>
-        <option value="Political Science">Political Science</option>
-        <option value="Psychology">Psychology</option>
-        <option value="Theatre">Theatre</option>
-      </optgroup>
+    <select id="cat-dropdown" required class="dropdown dropdown-collapsed">
+      <option value="All">All</option>
+      <option value="Africana Studies" data-abbreviation="AFST">Africana Studies</option>
+      <option value="American Studies" data-abbreviation="AMST">American Studies</option>
+      <option value="Anthropology and Sociology" data-abbreviation="ANSO">Anthropology and Sociology</option>
+      <option value="Art and Art History" data-abbreviation="ART">Art and Art History</option>
+      <option value="Arts Administration" data-abbreviation="AADM">Arts Administration</option>
+      <option value="Asian Studies" data-abbreviation="ASIA">Asian Studies</option>
+      <option value="Astronomy" data-abbreviation="Astronomy">Astronomy</option>
+      <option value="Biochemistry" data-abbreviation="BCHM">Biochemistry</option>
+      <option value="Biology" data-abbreviation="BIOL">Biology</option>
+      <option value="Business and Management" data-abbreviation="BUS">Business and Management</option>
+      <option value="Chemistry" data-abbreviation="CHEM">Chemistry</option>
+      <option value="Chinese" data-abbreviation="CHIN">Chinese</option>
+      <option value="Classics and Ancient Mediterranean Studies" data-abbreviation="CLAS">Classics and Ancient Mediterranean Studies</option>
+      <option value="Computer Science" data-abbreviation="CS">Computer Science</option>
+      <option value="Dance" data-abbreviation="DANC">Dance</option>
+      <option value="Data Science" data-abbreviation="Data Science">Data Science</option>
+      <option value="Earth Science" data-abbreviation="Earth Science">Earth Science</option>
+      <option value="Economics" data-abbreviation="ECON">Economics</option>
+      <option value="Educational Studies" data-abbreviation="EDUC">Educational Studies</option>
+      <option value="Engineering" data-abbreviation="Engineering">Engineering</option>
+      <option value="English" data-abbreviation="ENG">English</option>
+      <option value="Environmental Studies" data-abbreviation="ENVS">Environmental Studies</option>
+      <option value="Film Studies" data-abbreviation="FILM">Film Studies</option>
+      <option value="French" data-abbreviation="FREN">French</option>
+      <option value="Gender and Women's Studies" data-abbreviation="GWST">Gender and Women's Studies</option>
+      <option value="German" data-abbreviation="GERM">German</option>
+      <option value="Health Studies" data-abbreviation="Health Studies">Health Studies</option>
+      <option value="History" data-abbreviation="HIST">History</option>
+      <option value="Interdisciplinary Studies" data-abbreviation="IDIS">Interdisciplinary Studies</option>
+      <option value="International Relations" data-abbreviation="IR">International Relations</option>
+      <option value="International Studies" data-abbreviation="IS">International Studies</option>
+      <option value="Japanese" data-abbreviation="JAPN">Japanese</option>
+      <option value="Journalism" data-abbreviation="JOUR">Journalism</option>
+      <option value="Latin American Studies" data-abbreviation="LAST">Latin American Studies</option>
+      <option value="Law" data-abbreviation="Law">Law</option>
+      <option value="Mathematics" data-abbreviation="MATH">Mathematics</option>
+      <option value="Medicine" data-abbreviation="Medicine">Medicine</option>
+      <option value="Modern Languages" data-abbreviation="MODL">Modern Languages</option>
+      <option value="Music" data-abbreviation="MUS">Music</option>
+      <option value="Neuroscience" data-abbreviation="NEUR">Neuroscience</option>
+      <option value="Nursing" data-abbreviation="Nursing">Nursing</option>
+      <option value="Occupational Therapy" data-abbreviation="Occupational Therapy">Occupational Therapy</option>
+      <option value="Optometry" data-abbreviation="Optometry">Optometry</option>
+      <option value="Peace and Justice" data-abbreviation="PJST">Peace and Justice</option>
+      <option value="Philosophy" data-abbreviation="PHIL">Philosophy</option>
+      <option value="Physics" data-abbreviation="PHYS">Physics</option>
+      <option value="Political Science" data-abbreviation="PS">Political Science</option>
+      <option value="Psychology" data-abbreviation="PSYC">Psychology</option>
+      <option value="Theatre" data-abbreviation="THTR">Theatre</option>
     </select>
     <div id="posts"></div>
     <script>
@@ -251,6 +294,8 @@
             })
             .catch(error => console.error(error));
         }
+
+        
 
     </script>
   </body>
