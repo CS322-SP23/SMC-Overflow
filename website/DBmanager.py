@@ -47,6 +47,14 @@ class DBManager:
             else:   #Contingency
                 self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id ORDER BY user_questions.created_at DESC LIMIT %s",(num,))
         return(self.interface.dict_cur.fetchall())
+    
+    def getQuestionCategory(self, postID):
+        self.interface.dict_cur.execute("SELECT category FROM user_questions WHERE question_id = %s", (postID,))
+        result = self.interface.dict_cur.fetchone()
+        if result:
+            return result['category']
+        else:
+            return None
 
     def getQuestionsOrdered(self,num,category):
         self.interface.dict_cur.execute("select user_questions.*,users.username from user_questions join users on user_questions.user_id = users.user_id ORDER BY user_questions.created_at DESC LIMIT %s",(num,))
@@ -111,8 +119,6 @@ class DBManager:
         self.interface.execute("SELECT subject_id FROM subjects WHERE subject_name = %s", (s_name,))
         subject_id = self.interface.fetchone()
         return subject_id[0] if subject_id else None
-
-
     
     def getUser(self,user_ID=None,username=None,email=None):
         if user_ID and user_ID != "None":
@@ -192,8 +198,8 @@ class DBManager:
         rating=self.interface.cur.fetchone()
         return rating
 
-    def submitReply(self, pID, uID, text):
-        self.interface.execute("INSERT INTO replies (question_id, user_id, rating, text) values (%s, %s, 0, %s)", (pID, uID, text))
+    def submitReply(self, pID, uID, text, has_subject_match):
+        self.interface.execute("INSERT INTO replies (question_id, user_id, rating, text, has_subject_match) values (%s, %s, 0, %s, %s)", (pID, uID, text, has_subject_match))
     
     def getReplies(self,postID):
         self.interface.dict_cur.execute("select replies.*,users.username from replies join users on replies.user_id = users.user_id WHERE replies.question_ID=%s ORDER BY replies.created_at DESC",(postID,))

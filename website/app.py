@@ -130,10 +130,16 @@ def show_post(postID):
 @app.route('/submit_reply/<postID>', methods=['POST'])
 def reply(postID):
     text = request.form['reply_text']
-    database_manager.submitReply(postID, current_user.user_id, text)
+    category = database_manager.getQuestionCategory(postID)  # Get the category of the post
+    subjects = database_manager.getTutorSubjects(current_user.user_id)  # Get the subjects of the current user
+    if category in subjects:
+        has_subject_match = True
+    else:
+        has_subject_match = False
+    database_manager.submitReply(postID, current_user.user_id, text, has_subject_match)
     return redirect('/viewpost/'+postID)
 
 @app.route('/replies/<postID>')
 def get_replies(postID):
-    replies=database_manager.getReplies(postID)
+    replies = database_manager.getReplies(postID)
     return jsonify(replies)
