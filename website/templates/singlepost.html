@@ -130,6 +130,7 @@
       .checkmark {
         color: green;
       }
+
       
     </style>
   </head>
@@ -154,37 +155,57 @@
       </form>
     </div>
 
-    <div id="replyDiv", class="displayed-replies">
-
+    <div class="container">
+      <label class="label" for="subjectMatchCheckbox">Show Only Verified Replies</label>
+      <input type="checkbox" id="subjectMatchCheckbox" class="textbox">
     </div>
+
+    <div id="repliesContainer" class="displayed-replies"></div>
+
     <script>
       const postID = window.location.pathname.split('/').pop();
-      fetch(`/replies/${postID}`)
-        .then(response => response.json())
-        .then(replies => {
-          // Get the div where the replies will be displayed
-          const repliesDiv = document.createElement('div');
-          repliesDiv.classList.add('repies');
 
-          // Loop through the replies and create HTML elements for each one
-          replies.forEach(reply => {
-            const replyDiv = document.createElement('div');
-            replyDiv.classList.add('reply');
+      function getReplies() {
+        fetch(`/replies/${postID}`)
+          .then(response => response.json())
+          .then(replies => {
+            const repliesContainer = document.getElementById('repliesContainer');
+            repliesContainer.innerHTML = '';
 
-            // Add a check mark if has_subject_match is true
-            const checkMark = reply.has_subject_match ? '&#10004;' : '';
+            const checkbox = document.getElementById('subjectMatchCheckbox');
+            checkbox.addEventListener('change', function() {
+              const showOnlySubjectMatch = this.checked;
+              renderReplies(replies, showOnlySubjectMatch);
+            });
 
-            replyDiv.innerHTML = `
-              <h3>${reply.username} ${checkMark}</h3>
-              <p>${reply.text}</p>
-            `;
-            repliesDiv.appendChild(replyDiv);
-          });
+            renderReplies(replies, false); // Initially render all replies
+          })
+          .catch(error => console.error(error));
+      }
 
-          // Add the replies div to the page
-          const rDiv = document.getElementById('replyDiv');
-          rDiv.appendChild(repliesDiv);
+      function renderReplies(replies, showOnlySubjectMatch) {
+        const repliesContainer = document.getElementById('repliesContainer');
+        repliesContainer.innerHTML = '';
+
+        replies.forEach(reply => {
+          if (showOnlySubjectMatch && !reply.has_subject_match) {
+            return; // Skip replies that don't have a subject match if checkbox is checked
+          }
+
+          const replyDiv = document.createElement('div');
+          replyDiv.classList.add('reply');
+          const checkMark = reply.has_subject_match ? '&#10004;' : '';
+          replyDiv.innerHTML = `
+            <h3>${reply.username} ${checkMark}</h3>
+            <p>${reply.text}</p>
+          `;
+          repliesContainer.appendChild(replyDiv);
         });
-    </script>        
+      }
+
+      // Call the getReplies function initially to fetch and render the replies
+      getReplies();
+    </script>
+  
  </body>
 </html>

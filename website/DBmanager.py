@@ -11,7 +11,7 @@ class DBManager:
         self.interface.execute("INSERT INTO user_questions (user_id, question,category,title,rating) VALUES (%s, %s,%s,%s,0)", (id,question,category,title))
         
     def getQuestion(self, qID):
-        self.interface.dict_cur.execute('SELECT * from user_questions where question_id=%s', (qID))
+        self.interface.dict_cur.execute('SELECT * from user_questions where question_id=%s', (qID,))
         response=self.interface.dict_cur.fetchone()
         return(response)
     
