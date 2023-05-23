@@ -36,5 +36,7 @@ RUN export NVM_DIR="$HOME/.nvm" && \
 
 
 RUN apt -y install  postgresql postgresql-contrib
-WORKDIR /workspaces/SMC-Overflow/ 
 
+
+WORKDIR /workspaces/SMC-Overflow/ 
+COPY . .
